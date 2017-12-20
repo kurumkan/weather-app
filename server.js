@@ -1,141 +1,43 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+const bodyParser = require("body-parser");
+var mongoose = require("mongoose");
 
-app.get('/api/pins', (req, res) => {
-  const pins = [
-    {
-      id: '0',
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/1200px-Cat_November_2010-1a.jpg',
-      author: 'Ethan Hein',
-      description: 'Lorem Ipsum'
-    },
-    {
-      id: '1',
-      img: 'http://www.newportharborvets.com/sites/default/files/08-cat-cancer-4.jpeg',
-      author: 'Ethan Hein',
-      description: 'Lorem Ipsum'
-    },
-    {
-      id: '2',
-      img: 'https://www.aspca.org/sites/default/files/team-aspca-birthday-campaign-ad_090516_cat.jpg',
-      author: 'Ethan Hein',
-      description: 'Lorem Ipsum'
-    },
-    {
-      id: '3',
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/1200px-Cat_November_2010-1a.jpg',
-      author: 'Ethan Hein',
-      description: 'Lorem Ipsum'
-    },
-    {
-      id: '4',
-      img: 'http://www.newportharborvets.com/sites/default/files/08-cat-cancer-4.jpeg',
-      author: 'Ethan Hein',
-      description: 'Lorem Ipsum'
-    },
-    {
-      id: '5',
-      img: 'https://img.buzzfeed.com/buzzfeed-static/static/2015-03/3/16/enhanced/webdr10/enhanced-19898-1425418851-9.jpg?downsize=715:*&output-format=auto&output-quality=auto',
-      author: 'Ethan Hein',
-      description: 'Lorem Ipsum'
-    },
-    {
-      id: '6',
-      img: 'https://www.aspca.org/sites/default/files/team-aspca-birthday-campaign-ad_090516_cat.jpg',
-      author: 'Ethan Hein',
-      description: 'Lorem Ipsum'
-    },
-    {
-      id: '7',
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/1200px-Cat_November_2010-1a.jpg',
-      author: 'Ethan Hein',
-      description: 'Lorem Ipsum'
-    },
-    {
-      id: '8',
-      img: 'http://www.newportharborvets.com/sites/default/files/08-cat-cancer-4.jpeg',
-      author: 'Ethan Hein',
-      description: 'Lorem Ipsum'
-    },
-    {
-      id: '9',
-      img: 'https://img.buzzfeed.com/buzzfeed-static/static/2015-03/3/16/enhanced/webdr10/enhanced-19898-1425418851-9.jpg?downsize=715:*&output-format=auto&output-quality=auto',
-      author: 'Ethan Hein',
-      description: 'Lorem Ipsum'
-    },
-    {
-      id: '10',
-      img: 'https://www.aspca.org/sites/default/files/team-aspca-birthday-campaign-ad_090516_cat.jpg',
-      author: 'Ethan Hein',
-      description: 'Lorem Ipsum'
-    },
-    {
-      id: '11',
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/1200px-Cat_November_2010-1a.jpg',
-      author: 'Ethan Hein',
-      description: 'Lorem Ipsum'
-    },
-    {
-      id: '12',
-      img: 'http://www.newportharborvets.com/sites/default/files/08-cat-cancer-4.jpeg',
-      author: 'Ethan Hein',
-      description: 'Lorem Ipsum'
-    },
-    {
-      id: '13',
-      img: 'https://img.buzzfeed.com/buzzfeed-static/static/2015-03/3/16/enhanced/webdr10/enhanced-19898-1425418851-9.jpg?downsize=715:*&output-format=auto&output-quality=auto',
-      author: 'Ethan Hein',
-      description: 'Lorem Ipsum'
-    },
-    {
-      id: '14',
-      img: 'https://www.aspca.org/sites/default/files/team-aspca-birthday-campaign-ad_090516_cat.jpg',
-      author: 'Ethan Hein',
-      description: 'Lorem Ipsum'
-    },
-    {
-      id: '15',
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/1200px-Cat_November_2010-1a.jpg',
-      author: 'Ethan Hein',
-      description: 'Lorem Ipsum'
-    },
-    {
-      id: '16',
-      img: 'https://img.buzzfeed.com/buzzfeed-static/static/2015-03/3/16/enhanced/webdr10/enhanced-19898-1425418851-9.jpg?downsize=715:*&output-format=auto&output-quality=auto',
-      author: 'Ethan Hein',
-      description: 'Lorem Ipsum'
-    },
-    {
-      id: '17',
-      img: 'https://img.buzzfeed.com/buzzfeed-static/static/2015-03/3/16/enhanced/webdr10/enhanced-19898-1425418851-9.jpg?downsize=715:*&output-format=auto&output-quality=auto',
-      author: 'Ethan Hein',
-      description: 'Lorem Ipsum'
-    },
-    {
-      id: '18',
-      img: 'https://www.aspca.org/sites/default/files/team-aspca-birthday-campaign-ad_090516_cat.jpg',
-      author: 'Ethan Hein',
-      description: 'Lorem Ipsum'
-    }
-  ];
+var { handleError } = require("./util_helpers.js");
 
-  const limit = +req.query.limit || 10;
-  const offset = +req.query.offset || 0;
+mongoose.connect('mongodb://localhost/facebook-clone');
 
-  if(offset >= pins.length) {
-    res.json({
-      pins: [],
-      pinsLeft: 0
-    });
-  } else {
-    const pinsLeft = pins.length  - offset - limit;
-    res.json({
-      pins: pins.slice(offset, offset + limit),
-      pinsLeft: pinsLeft < 0 ? 0 : pinsLeft
-    });
+var User = require('./models/user');
+
+app.use(function(req, res, next){
+  if(req.headers["x-forwarded-proto"] === "https"){
+    res.redirect("http://"+req.hostname+req.url);
+  }else{
+    next();
   }
 });
+
+app.use(bodyParser.json({type:'*/*'}));
+
+//auth dependencies
+var Auth = require('./auth/authentication');
+var PassportServicer = require('./auth/passport');
+var passport = require('passport');
+var requireAuth = passport.authenticate('jwt', {session: false});
+var requireSignin = passport.authenticate('local', {session: false});
+
+app.use(passport.initialize());
+
+//jwt login
+app.post('/auth/signup', Auth.signup);
+app.post('/auth/signin', requireSignin, Auth.signin);
+
+app.get('/api/hello', function(req, res) {
+  res.json({
+    message: 'ok!'
+  });
+})
 
 if(process.env.NODE_ENV === 'production') {
   // production

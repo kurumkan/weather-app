@@ -1,0 +1,46 @@
+var mongoose = require('mongoose');
+var bcrypt=require('bcrypt-nodejs');
+
+var Schema = mongoose.Schema;
+
+var userSchema = new Schema({
+  username: { type: String, unique:true, lowercase: true, trim: true, sparse: true },
+  email: { type: String, unique:true, lowercase: true, trim: true, sparse: true },
+  password: { type: String, trim: true },
+  firstName: { type: String, unique:false, trim: true, sparse: true },
+  lastName: { type: String, unique:false, trim: true, sparse: true },
+});
+
+
+userSchema.pre('save', function(next){
+  var user = this;
+
+  //generate salt
+  bcrypt.genSalt(10, function(error, salt){
+    if(error) {
+      return next(error);
+    }
+    //hash the password via bcrypt
+    bcrypt.hash(user.password, salt, null, function(error, hash){
+      if(error) {
+        return next(error);
+      }
+      user.password=hash;
+      next();
+    })
+  })
+})
+
+//define a new function on userSchema
+userSchema.methods.comparePassword = function(submittedPassword, callback){
+  bcrypt.compare(submittedPassword, this.password, function(error, isMatch){
+    if(error){
+      return callback(error)
+    };
+
+    callback(null, isMatch);
+  })
+}
+
+
+module.exports = mongoose.model('user', userSchema);
