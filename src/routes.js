@@ -1,6 +1,5 @@
 import Main from 'components/Main';
-import ImageGridContainer from 'containers/ImageGridContainer';
-import Profile from 'components/Profile/index';
+import UsersListContainer from 'containers/UsersListContainer';
 import NotFound from 'components/NotFound/index';
 
 const createRoutes = (store) => {
@@ -16,11 +15,7 @@ const createRoutes = (store) => {
       childRoutes: [
         {
           path: 'pins',
-          component: ImageGridContainer,
-        },
-        {
-          path: 'profile',
-          component: Profile
+          component: UsersListContainer,
         },
         {
           path: '*',

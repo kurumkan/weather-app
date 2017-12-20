@@ -12,10 +12,11 @@ exports.getToken = getToken;
 
 
 exports.signup = function(request, response, next){
-  var {username, email, password} = request.body;
+  var { firstName, lastName, username, email, password} = request.body;
 
-  if(!username || !email || !password)
-    response.status(422).json({error: 'You must provide a username, an email and a password'});
+  if(!username || !email || !password || !firstName || !lastName) {
+    response.status(422).json({error: 'You must provide: username, email, password, firstname and lastname'});
+  }
 
   if(!validateEmail(email))
     response.status(422).json({error: 'Invalid email'});
@@ -36,7 +37,9 @@ exports.signup = function(request, response, next){
       var newUser = new User({
         username,
         email,
-        password
+        password,
+        lastName,
+        firstName
       });
       newUser.save(function(error){
         if(error)

@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+var expressSanitizer = require("express-sanitizer");
 
 var { handleError } = require("./util_helpers.js");
 
@@ -18,6 +19,7 @@ app.use(function(req, res, next){
   }
 });
 
+app.use(expressSanitizer());
 app.use(bodyParser.json({type:'*/*'}));
 
 //auth dependencies
@@ -33,11 +35,56 @@ app.use(passport.initialize());
 app.post('/auth/signup', Auth.signup);
 app.post('/auth/signin', requireSignin, Auth.signin);
 
-app.get('/api/hello', function(req, res) {
-  res.json({
-    message: 'ok!'
+app.get('/api/users', function(req, res) {
+  User.find({}, function(error, users) {
+    if(error) {
+      handle500(res, error);
+    } else {
+      res.json({ users });
+    }
   });
-})
+});
+
+app.get('/api/users/:username', function(req, res) {
+  var { username } = req.params;
+  User.find({ username }, function(error, user) {
+    if(error) {
+      handle500(res, error);
+    } else {
+      res.json({ user });
+    }
+  });
+});
+
+app.get('/api/users/:username', function(req, res) {
+  var { username } = req.params;
+  User.find({ username }, function(error, user) {
+    if(error) {
+      handle500(res, error);
+    } else {
+      res.json({ user });
+    }
+  });
+});
+
+app.put('/api/users/:username', function(req, res) {
+  var { username } = req.params;
+
+  const firstName = req.sanitize(req.body.firstName);
+  const  lastName = req.sanitize(req.body.lastName);
+
+  User.findOne({ username }, function(error, user) {
+    if(error) {
+      handle500(res, error);
+    } else {
+      user.firstName = firstName;
+      user.lastName = lastName;
+      user.save();
+      res.json({ firstName, lastName });
+    }
+  });
+});
+
 
 if(process.env.NODE_ENV === 'production') {
   // production

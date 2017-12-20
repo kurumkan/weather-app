@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import ImageGrid from 'components/ImageGrid';
+import UsersList from 'components/UsersList';
 import { getPins, showPinPopup, hidePinPopup } from 'actions/pinActions';
 
 const select = state => ({
@@ -14,4 +14,4 @@ const actions = {
   showPinPopup
 };
 
-export default connect(select, actions)(ImageGrid);
+export default connect(select, actions)(UsersList);
