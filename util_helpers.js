@@ -3,7 +3,7 @@ module.exports = {
   handleError: function(response, error, type=''){
     console.log(error.stack);
 
-    if(type=='YELP'){
+    if(type=='YELP') {
       response.status(400);
       response.json({error: "error: YELP api error"});
     }
@@ -15,7 +15,7 @@ module.exports = {
 
   // simple email validator
   validateEmail: function(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
   }
 };

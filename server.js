@@ -2,14 +2,14 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
-var mongoose = require("mongoose");
-var expressSanitizer = require("express-sanitizer");
+const mongoose = require("mongoose");
+const expressSanitizer = require("express-sanitizer");
 
-var { handleError } = require("./util_helpers.js");
+const { handleError } = require("./util_helpers.js");
 
 mongoose.connect('mongodb://localhost/facebook-clone');
 
-var User = require('./models/user');
+const User = require('./models/user');
 
 app.use(function(req, res, next){
   if(req.headers["x-forwarded-proto"] === "https"){
@@ -23,11 +23,11 @@ app.use(expressSanitizer());
 app.use(bodyParser.json({type:'*/*'}));
 
 //auth dependencies
-var Auth = require('./auth/authentication');
-var PassportServicer = require('./auth/passport');
-var passport = require('passport');
-var requireAuth = passport.authenticate('jwt', {session: false});
-var requireSignin = passport.authenticate('local', {session: false});
+const Auth = require('./auth/authentication');
+const PassportServicer = require('./auth/passport');
+const passport = require('passport');
+const requireAuth = passport.authenticate('jwt', {session: false});
+const requireSignin = passport.authenticate('local', {session: false});
 
 app.use(passport.initialize());
 
@@ -46,7 +46,7 @@ app.get('/api/users', function(req, res) {
 });
 
 app.get('/api/users/:username', function(req, res) {
-  var { username } = req.params;
+  const { username } = req.params;
   User.find({ username }, function(error, user) {
     if(error) {
       handle500(res, error);
@@ -57,7 +57,7 @@ app.get('/api/users/:username', function(req, res) {
 });
 
 app.put('/api/users/:username', function(req, res) {
-  var { username } = req.params;
+  const { username } = req.params;
 
   const firstName = req.sanitize(req.body.firstName);
   const  lastName = req.sanitize(req.body.lastName);

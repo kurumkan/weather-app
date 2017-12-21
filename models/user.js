@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
-var bcrypt=require('bcrypt-nodejs');
+const mongoose = require('mongoose');
+const bcrypt=require('bcrypt-nodejs');
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-var userSchema = new Schema({
+const userSchema = new Schema({
   username: { type: String, unique:true, lowercase: true, trim: true, sparse: true },
   email: { type: String, unique:true, lowercase: true, trim: true, sparse: true },
   password: { type: String, trim: true },
@@ -13,7 +13,7 @@ var userSchema = new Schema({
 
 
 userSchema.pre('save', function(next){
-  var user = this;
+  const user = this;
 
   //generate salt
   bcrypt.genSalt(10, function(error, salt){

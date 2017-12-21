@@ -1,10 +1,10 @@
-var jwt = require('jwt-simple');
+const jwt = require('jwt-simple');
 
-var User = require('../models/user');
-var {validateEmail} = require("../util_helpers");
+const User = require('../models/user');
+const {validateEmail} = require("../util_helpers");
 
-var getToken = function(user){
-  var timestamp = new Date().getTime();
+const getToken = function(user){
+  const timestamp = new Date().getTime();
   return jwt.encode({ sub: user.id, iat: timestamp }, process.env.secret);
 }
 
@@ -12,7 +12,7 @@ exports.getToken = getToken;
 
 
 exports.signup = function(request, response, next){
-  var { firstName, lastName, username, email, password} = request.body;
+  const { firstName, lastName, username, email, password} = request.body;
 
   if(!username || !email || !password || !firstName || !lastName) {
     response.status(422).json({error: 'You must provide: username, email, password, firstname and lastname'});
@@ -34,7 +34,7 @@ exports.signup = function(request, response, next){
     }
     else{
       //if a user doesnt exist - create one db entry
-      var newUser = new User({
+      const newUser = new User({
         username,
         email,
         password,
@@ -56,6 +56,6 @@ exports.signup = function(request, response, next){
 exports.signin = function(request, response, next){
   //At this stage user has authorized their password and email
   //we need give a token!
-  var user = request.user;
+  const user = request.user;
   response.send({token: getToken(user), username: user.username, userid: user.id})
 }

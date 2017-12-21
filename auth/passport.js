@@ -1,15 +1,15 @@
-var passport = require('passport');
-var User = require('../models/user');
-var JwtStrategy = require('passport-jwt').Strategy;
-var ExtractJwt = require('passport-jwt').ExtractJwt;
-var LocalStrategy = require('passport-local');
+const passport = require('passport');
+const User = require('../models/user');
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const LocalStrategy = require('passport-local');
 
 //setup options for local strategy
-var localOptions = {
+const localOptions = {
   usernameField: 'login'
 };
 //create local strategy
-var localLogin = new LocalStrategy(localOptions, function(login, password, done){
+const localLogin = new LocalStrategy(localOptions, function(login, password, done){
   //verify username and password.
   User.findOne({$or: [{email: login}, {username: login}]}, function(error, user){
     //DB error
@@ -40,7 +40,7 @@ var localLogin = new LocalStrategy(localOptions, function(login, password, done)
 
 
 //Setup options for JWT Strategy
-var jwtOptions = {
+const jwtOptions = {
   //tell passport where to find token - in header 'authorization'
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
   //what the secret? - to decode and get id
@@ -48,7 +48,7 @@ var jwtOptions = {
 };
 
 //Create JWT Strategy
-var jwtLogin = new JwtStrategy(jwtOptions, function(payload, done){
+const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done){
   //the callback is called when user attemts to login with jwt
 
   //check if user Id in the payload exists in the DB
