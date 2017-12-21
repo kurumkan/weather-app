@@ -56,17 +56,6 @@ app.get('/api/users/:username', function(req, res) {
   });
 });
 
-app.get('/api/users/:username', function(req, res) {
-  var { username } = req.params;
-  User.find({ username }, function(error, user) {
-    if(error) {
-      handle500(res, error);
-    } else {
-      res.json({ user });
-    }
-  });
-});
-
 app.put('/api/users/:username', function(req, res) {
   var { username } = req.params;
 
