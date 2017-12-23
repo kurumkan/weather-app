@@ -1,17 +1,13 @@
 import { connect } from 'react-redux';
 import UsersList from 'components/UsersList';
-import { getPins, showPinPopup, hidePinPopup } from 'actions/pinActions';
+import { getUsers } from 'actions/usersActions';
 
 const select = state => ({
-  focusedPin: state.pins.focusedPin,
-  pins: state.pins.pins,
-  pinsLeft: state.pins.pinsLeft
+  users: state.users.users
 });
 
 const actions = {
-  getPins,
-  hidePinPopup,
-  showPinPopup
+  getUsers
 };
 
 export default connect(select, actions)(UsersList);

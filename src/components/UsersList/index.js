@@ -9,16 +9,33 @@ class UsersList extends Component {
     super(props);
   }
 
-  render() {
+  componentDidMount() {
+    this.props.getUsers();
+  }
 
+  renderUsers(users) {
+    return users.map(user => (
+      <div key={user._id}>
+        {user.username}
+      </div>
+    ));
+  }
+
+  render() {
+    const { users } = this.props;
+    if(!users.length) {
+      return <Loader />;
+    }
     return (
-      <div>sad</div>
+      <div className="">
+        {this.renderUsers(users)}
+      </div>
     );
   }
 }
 
 UsersList.propTypes = {
-
+  getUsers: PropTypes.func.isRequired
 };
 
 UsersList.defaultProps = {

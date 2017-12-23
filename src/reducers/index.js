@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
-import pinsReducer from 'reducers/pinsReducer';
+import usersReducer from 'reducers/UsersReducer';
 
 const rootReducer = combineReducers({
   routing: routerReducer,
-  pins: pinsReducer
+  users: usersReducer
 });
 
 export default rootReducer;

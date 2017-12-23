@@ -58,6 +58,8 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.1",
     "express-sanitizer": "^1.0.2",
+    "http": "0.0.0",
+    "http-proxy": "^1.16.2",
     "jwt-simple": "^0.5.1",
     "mongoose": "^4.13.7",
     "passport": "^0.4.0",
@@ -72,6 +74,7 @@
     "react-router-redux": "^4.0.8",
     "react-router-scroll": "^0.4.3",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "request": "^2.83.0"
   }
 }
