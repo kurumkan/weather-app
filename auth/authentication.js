@@ -6,13 +6,13 @@ const {validateEmail} = require("../util_helpers");
 const getToken = function(user){
   const timestamp = new Date().getTime();
   return jwt.encode({ sub: user.id, iat: timestamp }, process.env.secret);
-}
+};
 
 exports.getToken = getToken;
 
 
 exports.signup = function(request, response, next){
-  const { firstName, lastName, username, email, password} = request.body;
+  const { firstName, lastName, username, email, password } = request.body;
 
   if(!username || !email || !password || !firstName || !lastName) {
     response.status(422).json({error: 'You must provide: username, email, password, firstname and lastname'});

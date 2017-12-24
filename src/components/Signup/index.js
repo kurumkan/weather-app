@@ -7,8 +7,12 @@ class Signup extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderField = this.renderField.bind(this);
   }
+
   handleSubmit(e) {
     e.preventDefault();
+    this.props.signinUser({
+
+    });
   }
 
   renderField({ input, label, type, meta: { touched, error }}) {

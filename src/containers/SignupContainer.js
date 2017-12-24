@@ -1,7 +1,7 @@
 import React from 'react';
 import Signup from 'components/Signup';
 import { reduxForm } from 'redux-form';
-import { signup } from 'actions/usersActions';
+import { signupUser } from 'actions/usersActions';
 
 // simple email validator
 const validateEmail = ( email ) => {
@@ -50,6 +50,6 @@ const validate = ( fromProps ) => {
 
 export default reduxForm({
   form: 'signup', // a unique identifier for this form
-  validate, // <--- validation function given to redux-form
-  signup
+  validate, // validation function given to redux-form
+  signupUser
 })(Signup)
