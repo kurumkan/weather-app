@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { browserHistory } from 'react-router';
 
 import Loader from 'components/Loader';
 import './style.css';
@@ -11,28 +10,21 @@ class UsersList extends Component {
   }
 
   componentDidMount() {
-    const { authenticated, getUsers } = this.props;
-    if(authenticated) {
-      this.props.getUsers();
-    } else {
-      browserHistory.push('/signup');
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-
+    this.props.getUsers();
   }
 
   renderUsers(users) {
     return users.map(user => (
       <div key={user._id}>
         {user.username}
+        <img src={user.imageUrl} />
       </div>
     ));
   }
 
   render() {
     const { users } = this.props;
+
     if(!users.length) {
       return <Loader />;
     }

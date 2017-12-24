@@ -57,8 +57,7 @@ class Signup extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    var t= this.props.signupUser();
-    console.log(t, 't')
+    this.props.signupUser();
   }
 
   renderField({ input, label, type, meta: { touched, error }}) {
@@ -82,6 +81,7 @@ class Signup extends React.Component {
           <Field name="email" type="email" component={this.renderField} label="Email"/>
           <Field name="firstName" component={this.renderField} label="First Name"/>
           <Field name="lastName" component={this.renderField} label="Last Name"/>
+          <Field name="imageUrl" component={this.renderField} label="Profile image url"/>
           <Field name="password" type="password" component={this.renderField} label="Password"/>
           <Field name="passwordConfirm" type="password" component={this.renderField} label="Confirm Password"/>
           <div>

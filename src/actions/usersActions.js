@@ -21,7 +21,6 @@ export const getUsers = (offset = 0, limit = 10) => (dispatch, getState) => {
       });
     })
     .catch(e => {
-      console.log(e)
       dispatch({
         type: GET_USERS_FAILURE,
         payload: 'Cannot load users'
@@ -30,11 +29,10 @@ export const getUsers = (offset = 0, limit = 10) => (dispatch, getState) => {
 };
 
 export const authUser = (token, userId) => (dispatch) => {
-  console.log('authUSer', token, userId)
   localStorage.setItem( 'token', token );
   localStorage.setItem( 'userid', userId );
-  browserHistory.push('/');
   dispatch({ type: AUTH_USER, payload: { userId } });
+  browserHistory.push('/');
 };
 
 export const signoutUser = () => (dispatch) => {
@@ -46,28 +44,41 @@ export const signoutUser = () => (dispatch) => {
 };
 
 export const signupUser = () => (dispatch, getState) => {
-  const { firstName, lastName, username, email, password } = getState().form.signup.values;
-  return api.signupUser({ firstName, lastName, username, email, password })
+  const { firstName, lastName, username, email, password, imageUrl } = getState().form.signup.values;
+  return api.signupUser({ firstName, lastName, username, email, password, imageUrl })
     .then(response => {
       const { userid, token } = response.data;
       dispatch(authUser(token, userid));
     })
-    .catch(e => dispatch({
-      type: AUTH_ERROR,
-      payload: e
-    }));
+    .catch(e => {
+      let message = 'Sorry something went wrong';
+      if(e.request.status === 422) {
+        message = 'This login or password are already in use';
+      }
+
+      dispatch({
+        type: AUTH_ERROR,
+        payload: message
+      })
+    });
 };
 
 export const signinUser = () => (dispatch, getState) => {
   const { login, password } = getState().form.signin.values;
-  console.log(login, password)
   api.signinUser({ login, password })
     .then((response) => {
       const { userid, token } = response.data;
       dispatch(authUser(token, userid));
     })
-    .catch(e => dispatch({
-      type: AUTH_ERROR,
-      payload: e
-    }));
+    .catch(e => {
+      let message = 'Sorry something went wrong';
+      if(e.request.status === 401) {
+        message = 'The login or password is incorrect';
+      }
+
+      dispatch({
+        type: AUTH_ERROR,
+        payload: message
+      })
+    });
 };

@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { applyRouterMiddleware, browserHistory, Router } from 'react-router';
 import { useScroll } from 'react-router-scroll';
+import 'global-styles.css';
 
 import createRoutes from 'routes';
 import configureStore from 'store';

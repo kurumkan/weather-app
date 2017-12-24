@@ -17,7 +17,7 @@ export default function ( state = INIT_STATE, action ) {
     case UNAUTH_USER:
       return { ...state, authenticated: false, userid: null, error: '' };
     case AUTH_ERROR:
-      return { ...state, authenticated: false, userid: null, error: action.payload.message };
+      return { ...state, authenticated: false, userid: null, error: action.payload };
     default:
       return state;
   }

@@ -9,6 +9,7 @@ const userSchema = new Schema({
   password: { type: String, trim: true },
   firstName: { type: String, unique:false, trim: true, sparse: true },
   lastName: { type: String, unique:false, trim: true, sparse: true },
+  imageUrl: { type: String, unique:false, trim: true, sparse: true }
 });
 
 

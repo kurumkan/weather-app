@@ -26,7 +26,6 @@ class Signin extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.props.signinUser)
     this.props.signinUser();
   }
 

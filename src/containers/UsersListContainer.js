@@ -3,8 +3,7 @@ import UsersList from 'components/UsersList';
 import { getUsers } from 'actions/usersActions';
 
 const select = state => ({
-  users: state.users.users,
-  authenticated: state.auth.authenticated
+  users: state.users.users
 });
 
 const actions = {
