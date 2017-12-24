@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import './Main.css';
 
-import Header from 'components/Header';
+import HeaderContainer from 'containers/HeaderContainer';
 
 const Home = ({ children }) => {
   return (
     <div className="container">
-      <Header />
+      <HeaderContainer />
       <div className="content-wrapper">
         {children}
       </div>

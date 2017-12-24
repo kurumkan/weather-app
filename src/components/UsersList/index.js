@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { browserHistory } from 'react-router';
 
 import Loader from 'components/Loader';
 import './style.css';
@@ -10,7 +11,12 @@ class UsersList extends Component {
   }
 
   componentDidMount() {
-    this.props.getUsers();
+    const { authenticated, getUsers } = this.props;
+    if(authenticated) {
+      this.props.getUsers();
+    } else {
+      browserHistory.push('/signup');
+    }
   }
 
   renderUsers(users) {

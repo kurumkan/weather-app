@@ -1,8 +1,11 @@
+import { browserHistory } from 'react-router';
 import {
   GET_USERS_REQUEST,
   GET_USERS_SUCCESS,
   GET_USERS_FAILURE,
-  SIGNUP_ERROR
+  SIGNUP_ERROR,
+  AUTH_USER,
+  UNAUTH_USER
 } from 'constants/actionTypes';
 
 import api from 'api';
@@ -27,9 +30,7 @@ export const getUsers = (offset = 0, limit = 10) => (dispatch, getState) => {
 };
 
 export const signupUser = () => (dispatch, getState) => {
-  console.log('singup')
   const { firstName, lastName, username, email, password } = getState().form.signup.values;
-  console.log(firstName)
   return api.signupUser({ firstName, lastName, username, email, password })
     .then(response => {
       const { userid, token } = response.data;
@@ -43,4 +44,20 @@ export const signupUser = () => (dispatch, getState) => {
 
 export const signinUser = () => {
   return null;
+};
+
+export const authUser = (token, userId) => (dispatch) => {
+  localStorage.setItem( 'token', token );
+  localStorage.setItem( 'userid', userid );
+
+  dispatch({ type: AUTH_USER, payload: { userid } });
+  browserHistory.push('/');
+};
+
+export const signoutUser = () => (dispatch) => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('userid');
+  browserHistory.push('signout');
+  
+  dispatch({ type: UNAUTH_USER });
 };

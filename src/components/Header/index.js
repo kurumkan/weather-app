@@ -4,12 +4,13 @@ import FontAwesome from 'react-fontawesome';
 import LogoImg from 'images/logo.jpg';
 import './style.css';
 
-const Header = () => (
+const Header = ({ authenticated, signoutUser }) => (
   <nav>
     <ul>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="signin">Signin</Link></li>
-      <li><Link to="signup">Signup</Link></li>
+      { authenticated && <li><Link to="/">Home</Link></li> }
+      { authenticated && <li><Link onClick={signoutUser}>Signout</Link></li> }
+      { !authenticated && <li><Link to="signin">Signin</Link></li> }
+      { !authenticated && <li><Link to="signup">Signup</Link></li> }
     </ul>
   </nav>
 );

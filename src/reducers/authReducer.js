@@ -4,15 +4,20 @@ import {
   AUTH_ERROR
 } from 'constants/actionTypes';
 
-export default function ( state = {}, action ) {
+const INIT_STATE = {
+  authenticated: false,
+  userid: '',
+  error: ''
+};
+
+export default function ( state = INIT_STATE, action ) {
   switch ( action.type ) {
     case AUTH_USER:
-      return { ...state, authenticated: true, userid: action.payload };
+      return { ...state, authenticated: true, userid: action.payload, error: '' };
     case UNAUTH_USER:
-      return { ...state, authenticated: false, userid: null };
+      return { ...state, authenticated: false, userid: null, error: '' };
     case AUTH_ERROR:
-      console.log('err', action.payload)
-      return { ...state, authenticated: false, userid: null };
+      return { ...state, authenticated: false, userid: null, error: action.payload.message };
     default:
       return state;
   }

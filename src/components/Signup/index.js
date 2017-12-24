@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-
+import Alert from 'components/Alert';
 
 // simple email validator
 const validateEmail = ( email ) => {
@@ -75,19 +75,22 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <Field name="username" component={this.renderField} label="Username"/>
-        <Field name="email" type="email" component={this.renderField} label="Email"/>
-        <Field name="firstName" component={this.renderField} label="First Name"/>
-        <Field name="lastName" component={this.renderField} label="Last Name"/>
-        <Field name="password" type="password" component={this.renderField} label="Password"/>
-        <Field name="passwordConfirm" type="password" component={this.renderField} label="Confirm Password"/>
-        <div>
-          <button type="submit" disabled={this.props.submitting}>
-            Submit
-          </button>
-        </div>
-      </form>
+      <div className="block-signup">
+        <Alert message={this.props.authError} />
+        <form onSubmit={this.handleSubmit}>
+          <Field name="username" component={this.renderField} label="Username"/>
+          <Field name="email" type="email" component={this.renderField} label="Email"/>
+          <Field name="firstName" component={this.renderField} label="First Name"/>
+          <Field name="lastName" component={this.renderField} label="Last Name"/>
+          <Field name="password" type="password" component={this.renderField} label="Password"/>
+          <Field name="passwordConfirm" type="password" component={this.renderField} label="Confirm Password"/>
+          <div>
+            <button type="submit" disabled={this.props.submitting}>
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
     )
   }
 }
