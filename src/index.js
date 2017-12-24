@@ -8,7 +8,7 @@ import { useScroll } from 'react-router-scroll';
 import createRoutes from 'routes';
 import configureStore from 'store';
 
-const store = configureStore(browserHistory);
+export const store = configureStore(browserHistory);
 const history = syncHistoryWithStore(browserHistory, store);
 const routes = createRoutes(store);
 

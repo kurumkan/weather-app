@@ -26,8 +26,11 @@ export const getUsers = (offset = 0, limit = 10) => (dispatch, getState) => {
     });
 };
 
-export const signupUser = ({ firstName, lastName, username, email, password })=> (dispatch) => (
-  axios.post('auth/signup', { firstName, lastName, username, email, password })
+export const signupUser = () => (dispatch, getState) => {
+  console.log('singup')
+  const { firstName, lastName, username, email, password } = getState().form.signup.values;
+  console.log(firstName)
+  return api.signupUser({ firstName, lastName, username, email, password })
     .then(response => {
       const { userid, token } = response.data;
       dispatch(authUser(token, userid));
@@ -35,8 +38,8 @@ export const signupUser = ({ firstName, lastName, username, email, password })=>
     .catch(e => dispatch({
       type: SIGNUP_ERROR,
       payload: e
-    }))
-);
+    }));
+};
 
 export const signinUser = () => {
   return null;

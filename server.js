@@ -32,8 +32,8 @@ const requireSignin = passport.authenticate('local', {session: false});
 app.use(passport.initialize());
 
 //jwt login
-app.post('/auth/signup', Auth.signup);
-app.post('/auth/signin', requireSignin, Auth.signin);
+app.post('/api/auth/signup', Auth.signup);
+app.post('/api/auth/signin', requireSignin, Auth.signin);
 
 app.get('/api/users', function(req, res) {
   User.find({}, function(error, users) {
