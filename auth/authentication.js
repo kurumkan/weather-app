@@ -57,5 +57,5 @@ exports.signin = function(request, response, next){
   //At this stage user has authorized their password and email
   //we need give a token!
   const user = request.user;
-  response.send({token: getToken(user), username: user.username, userid: user.id})
+  response.send({token: getToken(user), userid: user.id})
 }

@@ -6,7 +6,7 @@ export const getUsers = (offset = 0, limit = 10) => axios.get(`${ROOT_URL}?offse
 
 export const signupUser = data => axios.post('/api/auth/signup', data);
 
-export const signinUser = data => axios.post('/api/auth/signup', data);
+export const signinUser = data => axios.post('/api/auth/signin', data);
 
 export default {
   getUsers,

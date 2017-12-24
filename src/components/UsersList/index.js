@@ -19,6 +19,10 @@ class UsersList extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+
+  }
+
   renderUsers(users) {
     return users.map(user => (
       <div key={user._id}>
