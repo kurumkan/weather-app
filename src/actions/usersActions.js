@@ -24,3 +24,11 @@ export const getUsers = (offset = 0, limit = 10) => (dispatch, getState) => {
       });
     });
 };
+
+export const signupUser = () => {
+  return null;
+};
+
+export const signinUser = () => {
+  return null;
+};

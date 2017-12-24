@@ -1,8 +1,9 @@
 import React from 'react';
 import Signup from 'components/Signup';
 import { reduxForm } from 'redux-form';
+import { signup } from 'actions/usersActions';
 
-//  simple email validator
+// simple email validator
 const validateEmail = ( email ) => {
   const re = /^(([^<>()\[\]\\.,;:\s@']+(\.[^<>()\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test( email );
@@ -47,9 +48,8 @@ const validate = ( fromProps ) => {
   return errors;
 };
 
-
-
 export default reduxForm({
   form: 'signup', // a unique identifier for this form
   validate, // <--- validation function given to redux-form
+  signup
 })(Signup)

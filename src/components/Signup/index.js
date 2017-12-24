@@ -1,42 +1,45 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { touched, error }
-}) => (
-  <div>
-    <label>{label}</label>
-    <div>
-      <input {...input} placeholder={label} type={type} />
-      { touched && (error && <span>{error}</span>) }
-    </div>
-  </div>
-)
+class Signup extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.renderField = this.renderField.bind(this);
+  }
+  handleSubmit(e) {
+    e.preventDefault();
+  }
 
-const Signup = props => {
-  const { handleSubmit, pristine, reset, submitting } = props
-  return (
-    <form onSubmit={(e) => {
-        e.preventDefault();
-        console.log(e)
-      }}
-    >
-      <Field name="username" component={renderField} label="Username"/>
-      <Field name="email" type="email" component={renderField} label="Email" />
-      <Field name="firstName" component={renderField} label="First Name" />
-      <Field name="lastName" component={renderField} label="Last Name" />
-      <Field name="password" type="password" component={renderField} label="Password" />
-      <Field name="passwordConfirm" type="password" component={renderField} label="Confirm Password" />
+  renderField({ input, label, type, meta: { touched, error }}) {
+    return (
       <div>
-        <button type="submit" disabled={submitting}>
-          Submit
-        </button>
+        <label>{label}</label>
+        <div>
+          <input {...input} placeholder={label} type={type} />
+          { touched && (error && <span>{error}</span>) }
+        </div>
       </div>
-    </form>
-  )
-};
+    )
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <Field name="username" component={this.renderField} label="Username"/>
+        <Field name="email" type="email" component={this.renderField} label="Email"/>
+        <Field name="firstName" component={this.renderField} label="First Name"/>
+        <Field name="lastName" component={this.renderField} label="Last Name"/>
+        <Field name="password" type="password" component={this.renderField} label="Password"/>
+        <Field name="passwordConfirm" type="password" component={this.renderField} label="Confirm Password"/>
+        <div>
+          <button type="submit" disabled={this.props.submitting}>
+            Submit
+          </button>
+        </div>
+      </form>
+    )
+  }
+}
 
 export default Signup;
