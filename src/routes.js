@@ -1,6 +1,7 @@
 import Main from 'components/Main';
 import UsersListContainer from 'containers/UsersListContainer';
-import NotFound from 'components/NotFound/index';
+import SignupContainer from 'containers/SignupContainer';
+import NotFound from 'components/NotFound';
 
 const createRoutes = (store) => {
   const routes = [
@@ -9,13 +10,17 @@ const createRoutes = (store) => {
       component: Main,
       indexRoute: {
         onEnter: (nextState, replace) => replace({
-          pathname: 'pins'
+          pathname: 'users'
         })
       },
       childRoutes: [
         {
-          path: 'pins',
+          path: 'users',
           component: UsersListContainer,
+        },
+        {
+          path: 'signup',
+          component: SignupContainer,
         },
         {
           path: '*',
