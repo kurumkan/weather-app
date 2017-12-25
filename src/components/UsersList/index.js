@@ -16,7 +16,7 @@ class UsersList extends Component {
   renderUsers(users) {
     return users.map(user => (
       <div key={user._id}>
-        {user.username}
+        {user.username} {user.firstName} {user.lastName}
         <img src={user.imageUrl} />
       </div>
     ));

@@ -20,9 +20,14 @@ if(process.env.NODE_ENV !== 'production') {
 }
 
 const token = localStorage.getItem('token');
-if (token) {
+if(token) {
   const userid = localStorage.getItem('userid');
-  store.dispatch({ type: AUTH_USER, payload: {  userid } });
+  const firstName = localStorage.getItem('firstName');
+  const lastName = localStorage.getItem('lastName');
+  const username = localStorage.getItem('username');
+  const imageUrl = localStorage.getItem('imageUrl');
+
+  store.dispatch({ type: AUTH_USER, payload: {  userid, firstName, lastName, username, imageUrl } });
 }
 
 ReactDOM.render(

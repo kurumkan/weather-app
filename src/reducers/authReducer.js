@@ -5,6 +5,10 @@ import {
 } from 'constants/actionTypes';
 
 const INIT_STATE = {
+  username: '',
+  firstName: '',
+  lastName: '',
+  imageUrl: '',
   authenticated: false,
   userid: '',
   error: ''
@@ -13,11 +17,15 @@ const INIT_STATE = {
 export default function ( state = INIT_STATE, action ) {
   switch ( action.type ) {
     case AUTH_USER:
-      return { ...state, authenticated: true, userid: action.payload, error: '' };
+      return {
+        authenticated: true,
+        ...action.payload,
+        error: ''
+      };
     case UNAUTH_USER:
-      return { ...state, authenticated: false, userid: null, error: '' };
+      return { ...INIT_STATE };
     case AUTH_ERROR:
-      return { ...state, authenticated: false, userid: null, error: action.payload };
+      return { ...INIT_STATE, error: action.payload };
     default:
       return state;
   }

@@ -1,7 +1,9 @@
 import Main from 'components/Main';
 import UsersListContainer from 'containers/UsersListContainer';
+// import ProfileContainer from 'containers/ProfileContainer';
 import SignupContainer from 'containers/SignupContainer';
 import SigninContainer from 'containers/SigninContainer';
+import ProfileEditContainer from 'containers/ProfileEditContainer';
 import NotFound from 'components/NotFound';
 import RequireAuth from 'components/RequireAuth';
 
@@ -16,6 +18,14 @@ const createRoutes = (store) => {
         })
       },
       childRoutes: [
+        {
+          path: 'users/:id/edit',
+          component: RequireAuth(ProfileEditContainer),
+        },
+        // {
+        //   path: 'users/:id',
+        //   component: RequireAuth(ProfileContainer),
+        // },
         {
           path: 'users',
           component: RequireAuth(UsersListContainer),

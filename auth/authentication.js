@@ -10,7 +10,6 @@ const getToken = function(user){
 
 exports.getToken = getToken;
 
-
 exports.signup = function(request, response, next){
   const { firstName, lastName, username, email, password, imageUrl } = request.body;
 
@@ -46,7 +45,14 @@ exports.signup = function(request, response, next){
         if(error)
           return next(error);
         else
-          response.json({token: getToken(newUser), username: newUser.username, userid: newUser.id});
+          response.json({
+            token: getToken(newUser),
+            username: newUser.username,
+            userid: newUser.id,
+            firstName: newUser.firstName,
+            lastName: newUser.lastName,
+            imageUrl: newUser.imageUrl
+          });
       });
 
     }
@@ -58,5 +64,12 @@ exports.signin = function(request, response, next){
   //At this stage user has authorized their password and email
   //we need give a token!
   const user = request.user;
-  response.send({token: getToken(user), userid: user.id})
-}
+  response.send({
+    token: getToken(user),
+    userid: user.id,
+    username: user.username,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    imageUrl: user.imageUrl
+  })
+};

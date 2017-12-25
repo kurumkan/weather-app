@@ -51,6 +51,9 @@ app.get('/api/users/:username', function(req, res) {
     if(error) {
       handle500(res, error);
     } else {
+      if(!user) {
+        res.status(422).json({ error: 'user does not exist' });
+      }
       res.json({ user });
     }
   });
@@ -60,16 +63,22 @@ app.put('/api/users/:username', function(req, res) {
   const { username } = req.params;
 
   const firstName = req.sanitize(req.body.firstName);
-  const  lastName = req.sanitize(req.body.lastName);
+  const lastName = req.sanitize(req.body.lastName);
+  const imageUrl = req.sanitize(req.body.imageUrl);
 
   User.findOne({ username }, function(error, user) {
     if(error) {
       handle500(res, error);
     } else {
-      user.firstName = firstName;
-      user.lastName = lastName;
-      user.save();
-      res.json({ firstName, lastName });
+      if(!user) {
+        res.status(422).json({ error: 'user does not exist' });
+      } else {
+        user.firstName = firstName;
+        user.lastName = lastName;
+        user.imageUrl = imageUrl;
+        user.save();
+        res.json({ firstName, lastName, imageUrl });
+      }
     }
   });
 });
