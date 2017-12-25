@@ -4,7 +4,7 @@ const ROOT_URL = '/api/users/'
 
 export const getUsers = (offset = 0, limit = 10) => axios.get(`${ROOT_URL}?offset=${offset}&limit=${limit}`);
 
-export const getUser = (userid) => axios.get(`${ROOT_URL}${userid}`);
+export const getUser = (username) => axios.get(`${ROOT_URL}${username}`);
 
 export const updateUser = (username, data) => axios.put(`${ROOT_URL}/${username}`, data);
 

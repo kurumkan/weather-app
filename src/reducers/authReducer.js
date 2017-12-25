@@ -1,7 +1,8 @@
 import {
   AUTH_USER,
   UNAUTH_USER,
-  AUTH_ERROR
+  AUTH_ERROR,
+  UPDATE_USER_SUCCESS
 } from 'constants/actionTypes';
 
 const INIT_STATE = {
@@ -26,6 +27,8 @@ export default function ( state = INIT_STATE, action ) {
       return { ...INIT_STATE };
     case AUTH_ERROR:
       return { ...INIT_STATE, error: action.payload };
+    case UPDATE_USER_SUCCESS:
+      return { ...state, ...action.payload };
     default:
       return state;
   }

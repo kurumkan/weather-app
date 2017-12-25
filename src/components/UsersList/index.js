@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router';
 
 import Loader from 'components/Loader';
 import './style.css';
@@ -16,8 +17,10 @@ class UsersList extends Component {
   renderUsers(users) {
     return users.map(user => (
       <div key={user._id}>
-        {user.username} {user.firstName} {user.lastName}
-        <img src={user.imageUrl} />
+        <Link to={`users/${user.username}/`}>
+          {user.username} {user.firstName} {user.lastName}
+          <img src={user.imageUrl} />
+        </Link>
       </div>
     ));
   }

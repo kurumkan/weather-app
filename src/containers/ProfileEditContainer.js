@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Profile from 'components/ProfileEdit';
+import ProfileEdit from 'components/ProfileEdit';
 import { updateUser } from 'actions/usersActions';
 
 const select = state => ({
@@ -19,4 +19,4 @@ const actions = {
   updateUser
 };
 
-export default connect(select, actions)(Profile);
+export default connect(select, actions)(ProfileEdit);

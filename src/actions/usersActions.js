@@ -41,7 +41,7 @@ export const getUser = username => (dispatch, getState) => {
     .then((res) => {
       dispatch({
         type: GET_USER_SUCCESS,
-        payload: res.data
+        payload: res.data.user
       });
     })
     .catch(e => {
@@ -56,12 +56,14 @@ export const getUser = username => (dispatch, getState) => {
 export const updateUser = (username) => (dispatch, getState) => {
   dispatch({ type: UPDATE_USER_REQUEST });
   const data = getState().form.updateUser.values;
-  console.log(username, data)
   api.updateUser(username, data)
     .then((res) => {
+      localStorage.setItem( 'firstName', data.firstName );
+      localStorage.setItem( 'lastName', data.lastName );
+      localStorage.setItem( 'imageUrl', data.imageUrl );
       dispatch({
         type: UPDATE_USER_SUCCESS,
-        payload: res.data
+        payload: data
       });
       dispatch(getUsers());
     })
@@ -114,7 +116,6 @@ export const signinUser = () => (dispatch, getState) => {
   api.signinUser({ login, password })
     .then((response) => dispatch(authUser(response.data)))
     .catch(e => {
-      console.log(e)
       let message = 'Sorry something went wrong';
       if(e.request.status === 401) {
         message = 'The login or password is incorrect';

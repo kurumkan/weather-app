@@ -54,7 +54,7 @@ app.get('/api/users/:username', function(req, res) {
       if(!user) {
         res.status(422).json({ error: 'user does not exist' });
       }
-      res.json({ user });
+      res.json({ user: user[0] });
     }
   });
 });

@@ -28,9 +28,7 @@ class Profile extends React.Component {
   }
 
   componentDidMount() {
-    const targetUsername = this.props.location.pathname.replace('/users/', '').replace('/edit', '');
-    console.log(this.props.username , '**',targetUsername)
-    if(this.props.username !== targetUsername) {
+    if(this.props.username !== this.props.params.username) {
       browserHistory.push('/');
     }
   }
@@ -41,8 +39,7 @@ class Profile extends React.Component {
     updateUser(username);
   }
 
-  renderField({ input, label, placeholder, type, meta: { touched, error }}) {
-    console.log()
+  renderField({ input, label, type, meta: { touched, error }}) {
     return (
       <div>
         <label>{label}</label>
@@ -59,9 +56,9 @@ class Profile extends React.Component {
     return (
       <div className="profile-block">
         <form onSubmit={this.handleSubmit}>
-          <Field name="firstName" component={this.renderField} label="First Name" placeholder={firstName} initialValue={firstName} />
-          <Field name="lastName" component={this.renderField} label="Last Name" placeholder={lastName} />
-          <Field name="imageUrl" component={this.renderField} label="Profile image url" placeholder={imageUrl} />
+          <Field name="firstName" component={this.renderField} label="First Name" />
+          <Field name="lastName" component={this.renderField} label="Last Name" />
+          <Field name="imageUrl" component={this.renderField} label="Profile image url" />
           <div>
             <button type="submit" disabled={submitting}>
               Submit
