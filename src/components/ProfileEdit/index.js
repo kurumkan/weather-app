@@ -41,12 +41,13 @@ class Profile extends React.Component {
     updateUser(username);
   }
 
-  renderField({ input, label, type, meta: { touched, error }}) {
+  renderField({ input, label, placeholder, type, meta: { touched, error }}) {
+    console.log()
     return (
       <div>
         <label>{label}</label>
         <div>
-          <input {...input} placeholder={label} type={type} />
+          <input {...input} type={type} />
           { touched && (error && <span>{error}</span>) }
         </div>
       </div>
@@ -54,14 +55,15 @@ class Profile extends React.Component {
   }
 
   render() {
+    const { firstName, lastName, imageUrl, submitting } = this.props;
     return (
       <div className="profile-block">
         <form onSubmit={this.handleSubmit}>
-          <Field name="firstName" component={this.renderField} label="First Name"/>
-          <Field name="lastName" component={this.renderField} label="Last Name"/>
-          <Field name="imageUrl" component={this.renderField} label="Profile image url"/>
+          <Field name="firstName" component={this.renderField} label="First Name" placeholder={firstName} initialValue={firstName} />
+          <Field name="lastName" component={this.renderField} label="Last Name" placeholder={lastName} />
+          <Field name="imageUrl" component={this.renderField} label="Profile image url" placeholder={imageUrl} />
           <div>
-            <button type="submit" disabled={this.props.submitting}>
+            <button type="submit" disabled={submitting}>
               Submit
             </button>
           </div>

@@ -6,7 +6,13 @@ const select = state => ({
   username: state.auth.username,
   firstName: state.auth.firstName,
   lastName: state.auth.lastName,
-  imageUrl: state.auth.imageUrl
+  imageUrl: state.auth.imageUrl,
+  initialValues: {
+    firstName: state.auth.firstName,
+    lastName: state.auth.lastName,
+    imageUrl: state.auth.imageUrl,
+
+  }
 });
 
 const actions = {
