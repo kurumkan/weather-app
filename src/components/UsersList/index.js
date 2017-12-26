@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
 import Loader from 'components/Loader';
+import DefaultImage from '../../images/default.jpg';
 import './style.css';
 
 class UsersList extends Component {
@@ -16,10 +17,19 @@ class UsersList extends Component {
 
   renderUsers(users) {
     return users.map(user => (
-      <div key={user._id}>
-        <Link to={`users/${user.username}/`}>
-          {user.username} {user.firstName} {user.lastName}
-          <img src={user.imageUrl} />
+      <div key={user._id} className="users-list-item">
+        <Link to={`users/${user.username}/`} className="user-link">
+          <div className="img-wrapper">
+            <img src={user.imageUrl || DefaultImage} />
+          </div>
+          <div className="user-info">
+            <div>
+              {user.firstName} {user.lastName}
+            </div>
+            <div>
+              <span className="username">@{user.username}</span>
+            </div>
+          </div>
         </Link>
       </div>
     ));
@@ -32,9 +42,9 @@ class UsersList extends Component {
       return <Loader />;
     }
     return (
-      <div className="">
+      <section className="section-users-list">
         {this.renderUsers(users)}
-      </div>
+      </section>
     );
   }
 }

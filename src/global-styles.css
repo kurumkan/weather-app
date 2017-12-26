@@ -31,6 +31,14 @@ html {
     visibility: hidden;
 }
 
+body {
+    background-color: #f4f4f4;
+}
+
+html, body {
+    height: 100%;
+}
+
 /* ---------------------------------- */
 /* Reusable components */
 /* ---------------------------------- */
@@ -72,7 +80,8 @@ h3 {
 }
 
 section {
-    padding: 80px 0;
+    max-width: 1140px;
+    margin: 0 auto;
 }
 
 .box {
@@ -91,16 +100,16 @@ section {
 
 a:link,
 a:visited {
-    color: #f08b14;
+    color: #2a5885;
     text-decoration: none;
-    border-bottom: 1px solid #f08b14;
+    border-bottom: 1px solid #2a5885;
     padding-bottom: 1px;
     transition: color .2s, border-color .2s;
 }
 
 a:hover,
 a:active {
-    color: #555;
+    color: #2a5885;
     border-color: transparent;
 }
 
