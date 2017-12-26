@@ -1,0 +1,149 @@
+/* ---------------------------------- */
+/* Basic setup */
+/* ---------------------------------- */
+
+/* blue #4a76a8; */
+/* grey #656565 */
+/* black #000 */
+/* link-color #2a5885 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: #fff;
+    color: #555;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    text-rendering: optimizeLegibility;
+}
+
+.clearfix {  zoom: 1;  }
+.clearfix:after {
+    content: '.';
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+/* ---------------------------------- */
+/* Reusable components */
+/* ---------------------------------- */
+
+h1, h2, h3 {
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+h1 {
+    color: #fff;
+    font-size: 2.4rem;
+    word-spacing: 4px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+h2 {
+    font-size: 1.8rem;
+    word-spacing: 2px;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+h2:after {
+    display: block;
+    height: 2px;
+    background-color: orange;
+    content: "";
+    width: 100px;
+    margin: 30px auto;
+}
+
+h3 {
+    font-size: 110%;
+    margin-bottom: 15px;
+}
+
+section {
+    padding: 80px 0;
+}
+
+.box {
+    padding: 1%;
+}
+
+
+.box p {
+    font-size: 90%;
+    line-height: 145%;
+}
+
+/* ---------------------------------- */
+/* Links */
+/* ---------------------------------- */
+
+a:link,
+a:visited {
+    color: #f08b14;
+    text-decoration: none;
+    border-bottom: 1px solid #f08b14;
+    padding-bottom: 1px;
+    transition: color .2s, border-color .2s;
+}
+
+a:hover,
+a:active {
+    color: #555;
+    border-color: transparent;
+}
+
+/* ---------------------------------- */
+/* Buttons */
+/* ---------------------------------- */
+
+
+.btn:link,
+.btn:visited {
+    display: inline-block;
+    padding: 10px 30px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 300;
+    transition: all .3s;
+}
+
+.btn-full:link,
+.btn-full:visited {
+    background-color: #F29B34;
+    color: #fff;
+    margin-right: 15px;
+}
+
+.btn-ghost:link,
+.btn-ghost:visited {
+    border: 1px solid #F29B34;
+    color: #F29B34;
+}
+
+.btn:hover,
+.btn:active {
+    background-color: #f08b14;
+}
+
+.btn-full:hover,
+.btn-full:active {
+    border-color: #f08b14;
+}
+
+.btn-ghost:hover,
+.btn-ghost:active {
+    border: 1px solid #f08b14;
+    color: #fff;
+}
