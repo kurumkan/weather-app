@@ -49,7 +49,7 @@ class Profile extends React.Component {
         <div className="right">
           <input {...input} type={type} />
           <div className="error-wrapper">
-            { touched && (error && <span>{error}</span>) }
+            { touched && (error && <span>*{error}</span>) }
           </div>
         </div>
       </div>
@@ -64,7 +64,7 @@ class Profile extends React.Component {
           <Field name="firstName" component={this.renderField} label="First Name" />
           <Field name="lastName" component={this.renderField} label="Last Name" />
           <Field name="imageUrl" component={this.renderField} label="Profile image url" />
-          <div className="last-row">
+          <div className="text-right">
             <button type="submit" disabled={submitting} className="btn">
               Save
             </button>

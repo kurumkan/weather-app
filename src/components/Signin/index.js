@@ -1,12 +1,13 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Alert from 'components/Alert';
+import './style.css';
 
 const validate = ( fromProps ) => {
   const errors = {};
 
-  if ( !fromProps.username ) {
-    errors.username = 'Please enter an username';
+  if ( !fromProps.login ) {
+    errors.login = 'Please enter username or email';
   }
 
   if ( !fromProps.password ) {
@@ -31,11 +32,15 @@ class Signin extends React.Component {
 
   renderField({ input, label, type, meta: { touched, error }}) {
     return (
-      <div>
-        <label>{label}</label>
-        <div>
-          <input {...input} placeholder={label} type={type} />
-          { touched && (error && <span>{error}</span>) }
+      <div className="form-row">
+        <div className="left">
+          <label className="form-label">{label}</label>
+        </div>
+        <div className="right">
+          <input {...input} type={type} />
+          <div className="error-wrapper">
+            { touched && (error && <span>*{error}</span>) }
+          </div>
         </div>
       </div>
     )
@@ -43,18 +48,18 @@ class Signin extends React.Component {
 
   render() {
     return (
-      <div className="block-signin">
+      <section className="signin-section">
         <Alert message={this.props.authError} />
         <form onSubmit={this.handleSubmit}>
           <Field name="login" component={this.renderField} label="Username or Email"/>
           <Field name="password" type="password" component={this.renderField} label="Password"/>
-          <div>
-            <button type="submit" disabled={this.props.submitting}>
+          <div className="text-center">
+            <button type="submit" disabled={this.props.submitting} className="btn">
               Submit
             </button>
           </div>
         </form>
-      </div>
+      </section>
     )
   }
 }

@@ -86,6 +86,14 @@ section {
     line-height: 145%;
 }
 
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
 /* ---------------------------------- */
 /* Links */
 /* ---------------------------------- */
@@ -129,7 +137,7 @@ a:active {
 }
 
 /* ---------------------------------- */
-/* Input */
+/* Forms */
 /* ---------------------------------- */
 
 input {
@@ -140,3 +148,32 @@ input {
     border-radius: 4px;
     color: #000;
 }
+
+.error-wrapper {
+    height: 20px;
+    line-height: 20px;
+    color: lightcoral;
+    font-size: 0.8rem;
+}
+
+
+.form-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 8px 0;
+    line-height: 40px;
+}
+.form-row .right{
+    flex: 1 1 60%;
+}
+.form-row .left{
+    flex: 1 1 40%;
+    text-align: right;
+}
+.form-label {
+    display: inline-block;
+    text-align: right;
+    margin-right: 10px;
+}
+
