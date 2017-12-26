@@ -57,8 +57,6 @@ class Signup extends React.Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
-    console.log(this.props)
     this.props.signupUser();
   }
 
@@ -82,7 +80,7 @@ class Signup extends React.Component {
     return (
       <section className="form-section">
         <Alert message={this.props.authError} />
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
           <Field name="username" component={this.renderField} label="Username"/>
           <Field name="email" type="email" component={this.renderField} label="Email"/>
           <Field name="firstName" component={this.renderField} label="First Name"/>

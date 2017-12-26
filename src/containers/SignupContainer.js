@@ -3,7 +3,7 @@ import Signup from 'components/Signup';
 import { signupUser } from 'actions/usersActions';
 
 const select = state => ({
-  authError: state.auth.error
+  authError: state.auth.error.signup
 });
 
 const actions = {

@@ -25,8 +25,7 @@ class Signin extends React.Component {
     this.renderField = this.renderField.bind(this);
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit() {
     this.props.signinUser();
   }
 
@@ -50,7 +49,7 @@ class Signin extends React.Component {
     return (
       <section className="form-section">
         <Alert message={this.props.authError} />
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
           <Field name="login" component={this.renderField} label="Username or Email"/>
           <Field name="password" type="password" component={this.renderField} label="Password"/>
           <div className="text-center">
@@ -67,4 +66,5 @@ class Signin extends React.Component {
 export default reduxForm({
   form: 'signin', // a unique identifier for this form
   validate, // validation function given to redux-form
+  fields: [ 'login', 'password' ],
 })(Signin)

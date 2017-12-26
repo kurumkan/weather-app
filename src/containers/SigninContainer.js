@@ -3,7 +3,7 @@ import Signin from 'components/Signin';
 import { signinUser } from 'actions/usersActions';
 
 const select = state => ({
-  authError: state.auth.error
+  authError: state.auth.error.signin
 });
 
 const actions = {

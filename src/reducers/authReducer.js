@@ -1,8 +1,9 @@
 import {
   AUTH_USER,
   UNAUTH_USER,
-  AUTH_ERROR,
-  UPDATE_USER_SUCCESS
+  UPDATE_USER_SUCCESS,
+  SIGNUP_ERROR,
+  SIGNIN_ERROR
 } from 'constants/actionTypes';
 
 const INIT_STATE = {
@@ -12,7 +13,7 @@ const INIT_STATE = {
   imageUrl: '',
   authenticated: false,
   userid: '',
-  error: ''
+  error: {}
 };
 
 export default function ( state = INIT_STATE, action ) {
@@ -25,8 +26,10 @@ export default function ( state = INIT_STATE, action ) {
       };
     case UNAUTH_USER:
       return { ...INIT_STATE };
-    case AUTH_ERROR:
-      return { ...INIT_STATE, error: action.payload };
+    case SIGNIN_ERROR:
+      return { ...INIT_STATE, error: { signin: action.payload } };
+    case SIGNUP_ERROR:
+      return { ...INIT_STATE, error: { signup: action.payload } };
     case UPDATE_USER_SUCCESS:
       return { ...state, ...action.payload };
     default:

@@ -3,7 +3,8 @@ import {
   GET_USERS_REQUEST,
   GET_USERS_SUCCESS,
   GET_USERS_FAILURE,
-  AUTH_ERROR,
+  SIGNIN_ERROR,
+  SIGNUP_ERROR,
   AUTH_USER,
   UNAUTH_USER,
   GET_USER_REQUEST,
@@ -105,7 +106,7 @@ export const signupUser = () => (dispatch, getState) => {
       }
 
       dispatch({
-        type: AUTH_ERROR,
+        type: SIGNUP_ERROR,
         payload: message
       })
     });
@@ -122,7 +123,7 @@ export const signinUser = () => (dispatch, getState) => {
       }
 
       dispatch({
-        type: AUTH_ERROR,
+        type: SIGNIN_ERROR,
         payload: message
       })
     });
