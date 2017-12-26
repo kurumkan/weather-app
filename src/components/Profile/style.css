@@ -1,0 +1,15 @@
+.profile {
+    background-color: #fff;
+    border-radius: 5px;
+    width: 60%;
+    box-shadow: 0 2px 2px #ccc;
+    margin: 10px auto;
+    min-width: 300px;
+    max-width: 1200px;
+    text-align: center;
+    padding: 20px;
+}
+
+.profile img{
+    border-radius: 5px;
+}

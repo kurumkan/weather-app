@@ -12,7 +12,6 @@ exports.getToken = getToken;
 
 exports.signup = function(request, response, next){
   const { firstName, lastName, username, email, password, imageUrl } = request.body;
-
   if(!username || !email || !password || !firstName || !lastName) {
     response.status(422).json({error: 'You must provide: username, email, password, firstname and lastname'});
   }

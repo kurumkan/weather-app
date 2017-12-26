@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-
+import DefaultImage from '../../images/default.jpg';
 import Loader from 'components/Loader';
 import './style.css';
 
@@ -15,15 +15,23 @@ class Profile extends Component {
   }
 
   render() {
-    const { username, firstName } = this.props;
+    const { username, firstName, lastName, imageUrl } = this.props;
 
     if(!username) {
       return <Loader />;
     }
     return (
-      <div className="">
-        { firstName }
-      </div>
+      <section className="profile-section">
+        <div className="profile">
+          <img src={ imageUrl || DefaultImage}/>
+          <div>
+            <h2>{ firstName } { lastName }</h2>
+          </div>
+          <div>
+            @{ username }
+          </div>
+        </div>
+      </section>
     );
   }
 }
