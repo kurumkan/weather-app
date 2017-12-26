@@ -105,4 +105,15 @@ if(process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log('Server started on port ' + PORT));
+const server = app.listen(PORT, () => console.log('Server started on port ' + PORT));
+
+const io = require('socket.io').listen(server);
+
+io.sockets.on('connection', function(socket) {
+  socket.broadcast.emit('message', "this is a test");
+
+  socket.on('disconect', function() {
+    // change
+  });
+});
+
