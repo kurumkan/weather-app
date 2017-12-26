@@ -83,7 +83,7 @@ export const authUser = ({ token, userid, username, firstName, lastName, imageUr
   localStorage.setItem( 'lastName', lastName );
   localStorage.setItem( 'imageUrl', imageUrl );
 
-  dispatch({ type: AUTH_USER, payload: { userid } });
+  dispatch({ type: AUTH_USER, payload: { userid, firstName, lastName, imageUrl, username }});
   browserHistory.push('/');
 };
 

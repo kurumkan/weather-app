@@ -48,7 +48,7 @@ class Signin extends React.Component {
 
   render() {
     return (
-      <section className="signin-section">
+      <section className="form-section">
         <Alert message={this.props.authError} />
         <form onSubmit={this.handleSubmit}>
           <Field name="login" component={this.renderField} label="Username or Email"/>

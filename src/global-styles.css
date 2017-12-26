@@ -140,6 +140,17 @@ a:active {
 /* Forms */
 /* ---------------------------------- */
 
+.form-section {
+    background-color: #fff;
+    border-radius: 5px;
+    width: 60%;
+    box-shadow: 0 2px 2px #ccc;
+    margin: 10px auto;
+    min-width: 300px;
+    max-width: 1200px;
+    padding: 20px;
+}
+
 input {
     width: 100%;
     padding: 12px 20px;
@@ -155,7 +166,6 @@ input {
     color: lightcoral;
     font-size: 0.8rem;
 }
-
 
 .form-row {
     display: flex;

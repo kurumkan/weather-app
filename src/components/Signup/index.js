@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Alert from 'components/Alert';
+import './style.css';
 
 // simple email validator
 const validateEmail = ( email ) => {
@@ -57,16 +58,21 @@ class Signup extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log(this.props)
     this.props.signupUser();
   }
 
   renderField({ input, label, type, meta: { touched, error }}) {
     return (
-      <div>
-        <label>{label}</label>
-        <div>
-          <input {...input} placeholder={label} type={type} />
-          { touched && (error && <span>{error}</span>) }
+      <div className="form-row">
+        <div className="left">
+          <label className="form-label">{label}</label>
+        </div>
+        <div className="right">
+          <input {...input} type={type} />
+          <div className="error-wrapper">
+            { touched && (error && <span>*{error}</span>) }
+          </div>
         </div>
       </div>
     )
@@ -74,7 +80,7 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div className="block-signup">
+      <section className="form-section">
         <Alert message={this.props.authError} />
         <form onSubmit={this.handleSubmit}>
           <Field name="username" component={this.renderField} label="Username"/>
@@ -84,18 +90,18 @@ class Signup extends React.Component {
           <Field name="imageUrl" component={this.renderField} label="Profile image url"/>
           <Field name="password" type="password" component={this.renderField} label="Password"/>
           <Field name="passwordConfirm" type="password" component={this.renderField} label="Confirm Password"/>
-          <div>
-            <button type="submit" disabled={this.props.submitting}>
+          <div className="text-center">
+            <button type="submit" disabled={this.props.submitting} className="btn">
               Submit
             </button>
           </div>
         </form>
-      </div>
+      </section>
     )
   }
 }
 
 export default reduxForm({
   form: 'signup', // a unique identifier for this form
-  validate, // validation function given to redux-form
+  validate // validation function given to redux-form
 })(Signup)

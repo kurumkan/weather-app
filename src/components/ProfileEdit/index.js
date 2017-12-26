@@ -59,7 +59,7 @@ class Profile extends React.Component {
   render() {
     const { firstName, lastName, imageUrl, submitting } = this.props;
     return (
-      <section className="profile-edit-section">
+      <section className="form-section">
         <form onSubmit={this.handleSubmit}>
           <Field name="firstName" component={this.renderField} label="First Name" />
           <Field name="lastName" component={this.renderField} label="Last Name" />
