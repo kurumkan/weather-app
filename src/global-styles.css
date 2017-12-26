@@ -147,7 +147,7 @@ a:active {
     box-shadow: 0 2px 2px #ccc;
     margin: 10px auto;
     min-width: 300px;
-    max-width: 1200px;
+    max-width: 500px;
     padding: 20px;
 }
 
@@ -185,5 +185,19 @@ input {
     display: inline-block;
     text-align: right;
     margin-right: 10px;
+}
+
+.status {
+    display: inline-block;
+    margin-left: 10px;
+    text-transform: capitalize;
+}
+
+.status.online {
+    color: #5cb85c;
+}
+
+.status.offline {
+    color: #d9534f;
 }
 

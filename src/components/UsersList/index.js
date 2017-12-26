@@ -28,6 +28,7 @@ class UsersList extends Component {
             </div>
             <div>
               <span className="username">@{user.username}</span>
+              <span className={`status ${user.status}`}>{user.status}</span>
             </div>
           </div>
         </Link>

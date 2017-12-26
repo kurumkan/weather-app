@@ -15,7 +15,8 @@ class Profile extends Component {
   }
 
   render() {
-    const { username, firstName, lastName, imageUrl } = this.props;
+    const { username, firstName, lastName, imageUrl, isOnline } = this.props;
+    const status = isOnline ? 'online' : 'offline';
 
     if(!username) {
       return <Loader />;
@@ -28,7 +29,8 @@ class Profile extends Component {
             <h2>{ firstName } { lastName }</h2>
           </div>
           <div>
-            @{ username }
+            <span>@{ username }</span>
+            <span className={`status ${status}`}>{status}</span>
           </div>
         </div>
       </section>
