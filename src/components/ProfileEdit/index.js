@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { browserHistory } from 'react-router';
+import './style.css';
 
 const validate = ( fromProps ) => {
   const errors = {};
@@ -41,11 +42,15 @@ class Profile extends React.Component {
 
   renderField({ input, label, type, meta: { touched, error }}) {
     return (
-      <div>
-        <label>{label}</label>
-        <div>
+      <div className="form-row">
+        <div className="left">
+          <label className="form-label">{label}</label>
+        </div>
+        <div className="right">
           <input {...input} type={type} />
-          { touched && (error && <span>{error}</span>) }
+          <div className="error-wrapper">
+            { touched && (error && <span>{error}</span>) }
+          </div>
         </div>
       </div>
     )
@@ -54,18 +59,18 @@ class Profile extends React.Component {
   render() {
     const { firstName, lastName, imageUrl, submitting } = this.props;
     return (
-      <div className="profile-block">
+      <section className="profile-edit-section">
         <form onSubmit={this.handleSubmit}>
           <Field name="firstName" component={this.renderField} label="First Name" />
           <Field name="lastName" component={this.renderField} label="Last Name" />
           <Field name="imageUrl" component={this.renderField} label="Profile image url" />
-          <div>
-            <button type="submit" disabled={submitting}>
-              Submit
+          <div className="last-row">
+            <button type="submit" disabled={submitting} className="btn">
+              Save
             </button>
           </div>
         </form>
-      </div>
+      </section>
     )
   }
 }

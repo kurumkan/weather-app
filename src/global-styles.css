@@ -105,46 +105,38 @@ a:active {
     border-color: transparent;
 }
 
-/* ---------------------------------- */
-/* Buttons */
-/* ---------------------------------- */
 
 
-.btn:link,
-.btn:visited {
-    display: inline-block;
-    padding: 10px 30px;
-    border-radius: 100px;
-    text-decoration: none;
-    font-weight: 300;
-    transition: all .3s;
-}
 
-.btn-full:link,
-.btn-full:visited {
-    background-color: #F29B34;
-    color: #fff;
-    margin-right: 15px;
-}
-
-.btn-ghost:link,
-.btn-ghost:visited {
-    border: 1px solid #F29B34;
-    color: #F29B34;
-}
-
-.btn:hover,
+.btn,
 .btn:active {
-    background-color: #f08b14;
+    background-color: #4a76a8;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: all .1s;
+    outline: none;
 }
 
-.btn-full:hover,
-.btn-full:active {
-    border-color: #f08b14;
+.btn:hover {
+    background-color: #7199C5;
 }
 
-.btn-ghost:hover,
-.btn-ghost:active {
-    border: 1px solid #f08b14;
-    color: #fff;
+/* ---------------------------------- */
+/* Input */
+/* ---------------------------------- */
+
+input {
+    width: 100%;
+    padding: 12px 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #000;
 }
