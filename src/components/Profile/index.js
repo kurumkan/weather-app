@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
 import DefaultImage from '../../images/default.jpg';
 import Loader from 'components/Loader';
 import './style.css';
@@ -11,10 +10,10 @@ class Profile extends Component {
   }
 
   render() {
-    const { username, firstName, lastName, imageUrl, activeUsers } = this.props;
+    const { username, firstName, lastName, imageUrl, activeUsers, gettingAUser } = this.props;
     const status = activeUsers.indexOf(username) < 0 ? 'offline' : 'online';
 
-    if(!username) {
+    if(gettingAUser) {
       return <Loader />;
     }
     return (
