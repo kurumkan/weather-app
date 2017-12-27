@@ -13,7 +13,8 @@ import {
   UPDATE_USER_REQUEST,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE,
-  UPDATE_USERS_STATUS
+  SET_ACTIVE_USERS,
+  CHANGE_USER_STATE
 } from 'constants/actionTypes';
 
 import api from 'api';
@@ -85,7 +86,7 @@ export const authUser = ({ token, userid, username, firstName, lastName, imageUr
   localStorage.setItem( 'lastName', lastName );
   localStorage.setItem( 'imageUrl', imageUrl );
 
-  dispatch({ type: AUTH_USER, payload: { userid, firstName, lastName, imageUrl, username }});
+  dispatch({ type: AUTH_USER, payload: { userid, firstName, lastName, imageUrl, username }, meta: { remote: true }});
   browserHistory.push('/');
 };
 
@@ -93,7 +94,7 @@ export const signoutUser = () => (dispatch) => {
   localStorage.clear();
   browserHistory.push('/');
 
-  dispatch({ type: UNAUTH_USER });
+  dispatch({ type: UNAUTH_USER, meta: { remote: true } });
 };
 
 export const signupUser = () => (dispatch, getState) => {
@@ -130,6 +131,10 @@ export const signinUser = () => (dispatch, getState) => {
     });
 };
 
-export const updateUsersStatuses = (usersOnline) => dispatch => {
-  dispatch({ type: UPDATE_USERS_STATUS, payload: usersOnline });
+export const setActiveClients = (usersOnline) => dispatch => {
+  dispatch({ type: SET_ACTIVE_USERS, payload: usersOnline });
+};
+
+export const notifyClientStatusChange = (username, isOnline) => dispatch => {
+  dispatch({ type: CHANGE_USER_STATE, payload: { username, isOnline } });
 };

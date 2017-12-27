@@ -4,7 +4,8 @@ import { getUser } from 'actions/usersActions';
 
 const select = state => {
   const { username, firstName, lastName, imageUrl } = state.users.currentUser;
-  return { username, firstName, lastName, imageUrl };
+  const { activeUsers } = state.users;
+  return { username, firstName, lastName, imageUrl, activeUsers };
 };
 
 const actions = {

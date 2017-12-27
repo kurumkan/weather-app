@@ -6,17 +6,13 @@ import Loader from 'components/Loader';
 import './style.css';
 
 class Profile extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.getUser(this.props.params.username);
   }
 
   render() {
-    const { username, firstName, lastName, imageUrl, isOnline } = this.props;
-    const status = isOnline ? 'online' : 'offline';
+    const { username, firstName, lastName, imageUrl, activeUsers } = this.props;
+    const status = activeUsers.indexOf(username) < 0 ? 'offline' : 'online';
 
     if(!username) {
       return <Loader />;

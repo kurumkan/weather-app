@@ -7,38 +7,36 @@ import DefaultImage from '../../images/default.jpg';
 import './style.css';
 
 class UsersList extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.getUsers();
   }
 
-  renderUsers(users) {
-    return users.map(user => (
-      <div key={user._id} className="users-list-item">
-        <Link to={`users/${user.username}/`} className="user-link">
-          <div className="img-wrapper">
-            <img src={user.imageUrl || DefaultImage} />
-          </div>
-          <div className="user-info">
-            <div>
-              {user.firstName} {user.lastName}
+  renderUsers = (users) => {
+    return users.map(user => {
+      const status = this.props.activeUsers.indexOf(user.username) < 0 ? 'offline' : 'online';
+      return (
+        <div key={user._id} className="users-list-item">
+          <Link to={`users/${user.username}/`} className="user-link">
+            <div className="img-wrapper">
+              <img src={user.imageUrl || DefaultImage}/>
             </div>
-            <div>
-              <span className="username">@{user.username}</span>
-              <span className={`status ${user.status}`}>{user.status}</span>
+            <div className="user-info">
+              <div>
+                {user.firstName} {user.lastName}
+              </div>
+              <div>
+                <span className="username">@{user.username}</span>
+                <span className={`status ${status}`}>{status}</span>
+              </div>
             </div>
-          </div>
-        </Link>
-      </div>
-    ));
+          </Link>
+        </div>
+      )
+    });
   }
 
   render() {
     const { users } = this.props;
-
     if(!users.length) {
       return <Loader />;
     }

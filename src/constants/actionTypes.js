@@ -14,4 +14,5 @@ export const SIGNIN_ERROR = 'SIGNIN_ERROR';
 export const AUTH_USER = 'AUTH_USER';
 export const UNAUTH_USER = 'UNAUTH_USER';
 
-export const UPDATE_USERS_STATUS = 'UPDATE_USERS_STATUS';
+export const SET_ACTIVE_USERS = 'SET_ACTIVE_USERS';
+export const CHANGE_USER_STATE = 'CHANGE_USER_STATE';

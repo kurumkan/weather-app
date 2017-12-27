@@ -5,7 +5,8 @@ import {
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
   GET_USER_REQUEST,
-  UPDATE_USERS_STATUS
+  SET_ACTIVE_USERS,
+  CHANGE_USER_STATE
 } from 'constants/actionTypes';
 
 const initialState = {
@@ -13,7 +14,7 @@ const initialState = {
   currentUser: {},
   gettingUsers: false,
   gettingAUser: false,
-  usersOnline: {}
+  activeUsers: []
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -59,8 +60,21 @@ const usersReducer = (state = initialState, action) => {
         gettingAUser: false
       };
     }
-    case UPDATE_USERS_STATUS: {
-      return {...state, usersOnline: action.payload}
+    case SET_ACTIVE_USERS: {
+      return {...state, activeUsers: action.payload}
+    }
+    case CHANGE_USER_STATE: {
+      const activeUsers = [...state.activeUsers];
+      const { username, isOnline } = action.payload;
+      if(isOnline) {
+        activeUsers.push(username);
+      } else {
+        const index = activeUsers.indexOf(username);
+        if(index >= 0) {
+          activeUsers.splice(index, 1);
+        }
+      }
+      return {...state, activeUsers }
     }
     default: {
       return state;

@@ -31,6 +31,33 @@ const requireSignin = passport.authenticate('local', {session: false});
 
 app.use(passport.initialize());
 
+const PORT = process.env.PORT || 5000;
+const server = app.listen(PORT, () => console.log('Server started on port ' + PORT));
+
+// sockets
+const io = require('socket.io').listen(server);
+const activeSockets = {};
+
+io.sockets.on('connection', function(socket) {
+  socket.on('AUTH_USER', function(data) {
+    activeSockets[socket.id] = data.username;
+    socket.broadcast.emit('CLIENT_CONNECTED', data.username);
+    socket.emit('SET_ACTIVE_CLIENTS', activeSockets);
+  });
+
+  socket.on('UNAUTH_USER', function(data) {
+    socket.broadcast.emit('CLIENT_DISCONNECTED', activeSockets[socket.id]);
+    delete activeSockets[socket.id];
+  });
+
+
+  socket.on('disconnect', function() {
+    socket.broadcast.emit('CLIENT_DISCONNECTED', activeSockets[socket.id]);
+    delete activeSockets[socket.id];
+  });
+});
+
+
 //jwt login
 app.post('/api/auth/signup', Auth.signup);
 app.post('/api/auth/signin', requireSignin, Auth.signin);
@@ -103,27 +130,4 @@ if(process.env.NODE_ENV === 'production') {
   });
 }
 
-const PORT = process.env.PORT || 5000;
-
-const server = app.listen(PORT, () => console.log('Server started on port ' + PORT));
-
-const io = require('socket.io').listen(server);
-
-const activeSockets = {};
-
-io.sockets.on('connection', function(socket) {
-  console.log('connection', socket.id);
-  socket.on('AUTH_USER', function(data) {
-      activeSockets[socket.id] = data.username;
-      socket.broadcast.emit('CLIENT_CONNECTED', data.username);
-      socket.emit('SET_ACTIVE_CLIENTS', activeSockets);
-      console.log('setUSername', activeSockets, data);
-  });
-
-  socket.on('disconnect', function() {
-    socket.broadcast.emit('CLIENT_DISCONNECTED', activeSockets[socket.id]);
-    console.log('disconnect', socket.id, activeSockets);
-    delete activeSockets[socket.id];
-  });
-});
 

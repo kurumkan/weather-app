@@ -4,7 +4,7 @@ import { getUsers } from 'actions/usersActions';
 
 const select = state => ({
   users: state.users.users,
-  usersOnline: state.users.usersOnline
+  activeUsers: state.users.activeUsers
 });
 
 const actions = {
