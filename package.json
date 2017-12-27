@@ -1,7 +1,7 @@
 {
-  "name": "pinterest-clone",
+  "name": "facebook-clone",
   "version": "1.0.0",
-  "description": "pinterest clone (fcc challenge)",
+  "description": "facebook clone (fcc challenge)",
   "main": "index.js",
   "scripts": {
     "lint": "eslint src/ --config=.eslintrc",
@@ -15,7 +15,7 @@
   "pre-commit": "lint",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kurumkan/pinterest-clone-fcc.git"
+    "url": "git+https://github.com/kurumkan/facebook-dummy-clone.git"
   },
   "keywords": [
     "fcc",
@@ -26,9 +26,9 @@
   "author": "kurumkan",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kurumkan/pinterest-clone-fcc/issues"
+    "url": "https://github.com/kurumkan/facebook-dummy-clone/issues"
   },
-  "homepage": "https://github.com/kurumkan/pinterest-clone-fcc#readme",
+  "homepage": "https://github.com/kurumkan/facebook-dummy-clone#readme",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
