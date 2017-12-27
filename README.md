@@ -1,6 +1,6 @@
 # Facebook dummy clone
 The project is in development.
-Some features has been implemented - you can see it in <a href="kurumkan-facebook.herokuapp.com">the demo</a>
+Some features has been implemented - you can see it in <a href="http://kurumkan-facebook.herokuapp.com">the demo</a>
 
 ## Installation
 ```
