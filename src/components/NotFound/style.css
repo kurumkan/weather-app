@@ -1,0 +1,16 @@
+.notfound-section {
+    background-color: #fff;
+    border-radius: 5px;
+    width: 60%;
+    box-shadow: 0 2px 2px #ccc;
+    margin: 10px auto;
+    min-width: 300px;
+    max-width: 500px;
+    padding: 20px;
+    text-align: center;
+}
+
+.notfound-content h1{
+    color: #333;
+    font-size: 5rem;
+}

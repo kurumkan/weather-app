@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router';
+import './style.css';
 
-const NotFound = () => <div>404</div>;
+const NotFound = () => (
+  <section className="notfound-section">
+    <div className="notfound-content">
+      <h1>404</h1>
+      <h2>Sorry, we can't find the page!</h2>
+      <p>Either something went wrong or the page doesn't exist anymore</p>
+      <Link to="/" className="btn">Take me home</Link>
+    </div>
+
+  </section>
+);
 
 export default NotFound;
