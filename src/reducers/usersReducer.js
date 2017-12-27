@@ -4,14 +4,16 @@ import {
   GET_USERS_FAILURE,
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
-  GET_USER_REQUEST
+  GET_USER_REQUEST,
+  UPDATE_USERS_STATUS
 } from 'constants/actionTypes';
 
 const initialState = {
   users: [],
   currentUser: {},
   gettingUsers: false,
-  gettingAUser: false
+  gettingAUser: false,
+  usersOnline: {}
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -57,7 +59,9 @@ const usersReducer = (state = initialState, action) => {
         gettingAUser: false
       };
     }
-
+    case UPDATE_USERS_STATUS: {
+      return {...state, usersOnline: action.payload}
+    }
     default: {
       return state;
     }

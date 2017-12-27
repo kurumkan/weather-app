@@ -28,7 +28,7 @@ if(token) {
   const username = localStorage.getItem('username');
   const imageUrl = localStorage.getItem('imageUrl');
 
-  store.dispatch({ type: AUTH_USER, payload: {  userid, firstName, lastName, username, imageUrl } });
+  store.dispatch({ type: AUTH_USER, payload: {  userid, firstName, lastName, username, imageUrl }, meta: { remote: true } });
 }
 
 ReactDOM.render(

@@ -12,7 +12,8 @@ import {
   GET_USER_FAILURE,
   UPDATE_USER_REQUEST,
   UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAILURE
+  UPDATE_USER_FAILURE,
+  UPDATE_USERS_STATUS
 } from 'constants/actionTypes';
 
 import api from 'api';
@@ -127,4 +128,8 @@ export const signinUser = () => (dispatch, getState) => {
         payload: message
       })
     });
+};
+
+export const updateUsersStatuses = (usersOnline) => dispatch => {
+  dispatch({ type: UPDATE_USERS_STATUS, payload: usersOnline });
 };

@@ -109,11 +109,21 @@ const server = app.listen(PORT, () => console.log('Server started on port ' + PO
 
 const io = require('socket.io').listen(server);
 
-io.sockets.on('connection', function(socket) {
-  socket.broadcast.emit('message', "this is a test");
+const activeSockets = {};
 
-  socket.on('disconect', function() {
-    // change
+io.sockets.on('connection', function(socket) {
+  console.log('connection', socket.id);
+  socket.on('AUTH_USER', function(data) {
+      activeSockets[socket.id] = data.username;
+      socket.broadcast.emit('CLIENT_CONNECTED', data.username);
+      socket.emit('SET_ACTIVE_CLIENTS', activeSockets);
+      console.log('setUSername', activeSockets, data);
+  });
+
+  socket.on('disconnect', function() {
+    socket.broadcast.emit('CLIENT_DISCONNECTED', activeSockets[socket.id]);
+    console.log('disconnect', socket.id, activeSockets);
+    delete activeSockets[socket.id];
   });
 });
 

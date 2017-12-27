@@ -3,7 +3,8 @@ import UsersList from 'components/UsersList';
 import { getUsers } from 'actions/usersActions';
 
 const select = state => ({
-  users: state.users.users
+  users: state.users.users,
+  usersOnline: state.users.usersOnline
 });
 
 const actions = {

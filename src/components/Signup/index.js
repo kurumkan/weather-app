@@ -50,17 +50,12 @@ const validate = ( fromProps ) => {
 
 
 class Signup extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.renderField = this.renderField.bind(this);
-  }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     this.props.signupUser();
   }
 
-  renderField({ input, label, type, meta: { touched, error }}) {
+  renderField = ({ input, label, type, meta: { touched, error }}) => {
     return (
       <div className="form-row">
         <div className="left">

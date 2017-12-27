@@ -22,25 +22,19 @@ const validate = ( fromProps ) => {
 };
 
 class Profile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.renderField = this.renderField.bind(this);
-  }
-
   componentDidMount() {
     if(this.props.username !== this.props.params.username) {
-      browserHistory.push('/');
+      browserHistory.push(`/users/${this.props.username}/edit`);
     }
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
     const { updateUser, username } = this.props;
     updateUser(username);
   }
 
-  renderField({ input, label, type, meta: { touched, error }}) {
+  renderField = ({ input, label, type, meta: { touched, error }}) => {
     return (
       <div className="form-row">
         <div className="left">

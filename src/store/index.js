@@ -3,10 +3,14 @@ import thunk from 'redux-thunk';
 import { routerMiddleware } from 'react-router-redux';
 
 import rootReducer from 'reducers';
+import remoteActionsMiddleWare from 'middlewares/remoteActionsMiddleWare';
+import socket from '../socketClient';
+
 
 const configureStore = (history) => {
   const middleware = [
     thunk,
+    remoteActionsMiddleWare(socket),
     routerMiddleware(history)
   ];
 
