@@ -7,7 +7,8 @@ const expressSanitizer = require("express-sanitizer");
 
 const { handleError } = require("./util_helpers.js");
 
-mongoose.connect('mongodb://localhost/facebook-clone');
+const MONGO_URL = process.env.MONGOLAB_URI || 'mongodb://localhost/facebook-clone';
+mongoose.connect(MONGO_URL);
 
 const User = require('./models/user');
 
