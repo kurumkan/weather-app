@@ -1,0 +1,33 @@
+.image-wrapper {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.image-wrapper img {
+    max-width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.image-wrapper .image {
+    opacity: 0;
+    transition: all 1s;
+}
+
+.image-wrapper .loaded {
+    opacity: 1;
+}
+
+.image-wrapper .placeholder {
+    transition: all 1s;
+}
+
+.image-wrapper .placeholder.hidden {
+    display: none;
+}
+

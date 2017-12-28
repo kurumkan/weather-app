@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import DefaultImage from '../../images/default.jpg';
+import ImgPlaceholder from '../../images/image-placeholder.jpg';
+import Img from 'components/Img';
 import Loader from 'components/Loader';
 import './style.css';
 
@@ -19,7 +20,7 @@ class Profile extends Component {
     return (
       <section className="profile-section">
         <div className="profile">
-          <img src={ imageUrl || DefaultImage}/>
+          <Img imageUrl={imageUrl} placeholder={ImgPlaceholder} width="100%" />
           <div>
             <h2>{ firstName } { lastName }</h2>
           </div>

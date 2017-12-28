@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
+import Img from 'components/Img';
 import Loader from 'components/Loader';
-import DefaultImage from '../../images/default.jpg';
+import ImgPlaceholder from '../../images/image-placeholder.jpg';
 import './style.css';
 
 class UsersList extends Component {
@@ -18,7 +19,7 @@ class UsersList extends Component {
         <div key={user.username} className="users-list-item">
           <Link to={`users/${user.username}/`} className="user-link">
             <div className="img-wrapper">
-              <img src={user.imageUrl || DefaultImage}/>
+              <Img imageUrl={user.imageUrl} placeholder={ImgPlaceholder} width="200px" />
             </div>
             <div className="user-info">
               <div>
