@@ -69,7 +69,6 @@ app.get('/api/users', function(req, res) {
       handle500(res, error);
     } else {
       const data = users.map(user => ({
-        email: user.email,
         firstName: user.firstName,
         imageUrl: user.imageUrl,
         lastName: user.lastName,
@@ -91,7 +90,6 @@ app.get('/api/users/:username', function(req, res) {
       }
       const user = users[0];
       const data = {
-        email: user.email,
         firstName: user.firstName,
         imageUrl: user.imageUrl,
         lastName: user.lastName,
