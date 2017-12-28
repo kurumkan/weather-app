@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import FontAwesome from 'react-fontawesome';
-import LogoImg from 'images/logo.jpg';
 import './style.css';
 
 const Header = ({ authenticated, username, signoutUser }) => (
@@ -17,5 +16,16 @@ const Header = ({ authenticated, username, signoutUser }) => (
     </nav>
   </header>
 );
+
+Header.propTypes = {
+  authenticated: PropTypes.bool,
+  signoutUser: PropTypes.func.isRequired,
+  username: PropTypes.string
+};
+
+Header.defaultProps = {
+  authenticated: false,
+  username: ''
+};
 
 export default Header;

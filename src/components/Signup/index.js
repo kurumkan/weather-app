@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import Alert from 'components/Alert';
 import './style.css';
@@ -93,6 +94,18 @@ class Signup extends React.Component {
     )
   }
 }
+
+Signup.propTypes = {
+  authError: PropTypes.string,
+  submitting: PropTypes.bool,
+  handleSubmit: PropTypes.func.isRequired,
+  signupUser: PropTypes.func.isRequired
+};
+
+Signup.defaultProps = {
+  authError: '',
+  submitting: false
+};
 
 export default reduxForm({
   form: 'signup', // a unique identifier for this form

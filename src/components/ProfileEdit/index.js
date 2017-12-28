@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { browserHistory } from 'react-router';
 import './style.css';
@@ -21,7 +22,7 @@ const validate = ( fromProps ) => {
   return errors;
 };
 
-class Profile extends React.Component {
+class ProfileEdit extends React.Component {
   componentDidMount() {
     if(this.props.username !== this.props.params.username) {
       browserHistory.push(`/users/${this.props.username}/edit`);
@@ -69,7 +70,25 @@ class Profile extends React.Component {
   }
 }
 
+ProfileEdit.propTypes = {
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  imageUrl: PropTypes.string,
+  submitting: PropTypes.bool,
+  username: PropTypes.string,
+
+  updateUser: PropTypes.func.isRequired
+};
+
+ProfileEdit.defaultProps = {
+  firstName: '',
+  lastName: '',
+  imageUrl: '',
+  submitting: false,
+  username: ''
+};
+
 export default reduxForm({
   form: 'updateUser', // a unique identifier for this form
   validate, // validation function given to redux-form
-})(Profile)
+})(ProfileEdit)

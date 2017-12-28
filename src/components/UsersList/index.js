@@ -15,7 +15,7 @@ class UsersList extends Component {
     return users.map(user => {
       const status = this.props.activeUsers.indexOf(user.username) < 0 ? 'offline' : 'online';
       return (
-        <div key={user._id} className="users-list-item">
+        <div key={user.username} className="users-list-item">
           <Link to={`users/${user.username}/`} className="user-link">
             <div className="img-wrapper">
               <img src={user.imageUrl || DefaultImage}/>
@@ -49,11 +49,21 @@ class UsersList extends Component {
 }
 
 UsersList.propTypes = {
+  activeUsers: PropTypes.arrayOf(PropTypes.string),
+  users: PropTypes.arrayOf(PropTypes.shape({
+    email: PropTypes.string,
+    firstName: PropTypes.string,
+    imageUrl: PropTypes.string,
+    lastName: PropTypes.string,
+    userName: PropTypes.string
+  })),
+
   getUsers: PropTypes.func.isRequired
 };
 
 UsersList.defaultProps = {
-
+  activeUsers: [],
+  users: []
 };
 
 export default UsersList;

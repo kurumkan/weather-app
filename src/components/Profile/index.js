@@ -34,11 +34,23 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
+  activeUsers: PropTypes.arrayOf(PropTypes.string),
+  firstName: PropTypes.string,
+  gettingAUser: PropTypes.bool,
+  imageUrl: PropTypes.string,
+  lastName: PropTypes.string,
+  username: PropTypes.string,
+
   getUser: PropTypes.func.isRequired
 };
 
 Profile.defaultProps = {
-
+  activeUsers: [],
+  firstName: '',
+  gettingAUser: false,
+  imageUrl: '',
+  lastName: '',
+  username: ''
 };
 
 export default Profile;

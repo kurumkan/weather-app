@@ -68,7 +68,14 @@ app.get('/api/users', function(req, res) {
     if(error) {
       handle500(res, error);
     } else {
-      res.json({ users });
+      const data = users.map(user => ({
+        email: user.email,
+        firstName: user.firstName,
+        imageUrl: user.imageUrl,
+        lastName: user.lastName,
+        username: user.username
+      }));
+      res.json({ users: data });
     }
   });
 });
