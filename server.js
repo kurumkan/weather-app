@@ -82,14 +82,22 @@ app.get('/api/users', function(req, res) {
 
 app.get('/api/users/:username', function(req, res) {
   const { username } = req.params;
-  User.find({ username }, function(error, user) {
+  User.find({ username }, function(error, users) {
     if(error) {
       handle500(res, error);
     } else {
-      if(!user) {
+      if(!users) {
         res.status(422).json({ error: 'user does not exist' });
       }
-      res.json({ user: user[0] });
+      const user = users[0];
+      const data = {
+        email: user.email,
+        firstName: user.firstName,
+        imageUrl: user.imageUrl,
+        lastName: user.lastName,
+        username: user.username
+      };
+      res.json({ user: data });
     }
   });
 });
