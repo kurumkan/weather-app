@@ -10,6 +10,7 @@ mongoose.connect(MONGO_URL);
 
 const ActiveSockets = require('./models/activesockets');
 const User = require('./models/user');
+ActiveSockets.remove({});
 
 app.use(function(req, res, next){
   if(req.headers['x-forwarded-proto'] === 'https'){
@@ -39,33 +40,44 @@ const io = require('socket.io').listen(server);
 
 io.sockets.on('connection', function(socket) {
   socket.on('AUTH_USER', function(data) {
-    ActiveSockets.create({
-      socketId: socket.id,
-      username: data.username
-    }, function (error, newSocket) {
-      if(!error) {
-        socket.broadcast.emit('CLIENT_CONNECTED', data.username);
-        ActiveSockets.find({}, function(error, activeSockets) {
-          if(!error) {
-            socket.emit('SET_ACTIVE_CLIENTS', activeSockets);
-          }
-        });
+    ActiveSockets.update(
+      { username: data.username },
+      { socketId: socket.id },
+      { upsert: true },
+
+      function (error, newSocket) {
+        if(!error) {
+          socket.broadcast.emit('CLIENT_CONNECTED', data.username);
+          ActiveSockets.find({}, function(error, activeSockets) {
+            if(!error) {
+              socket.emit('SET_ACTIVE_CLIENTS', activeSockets);
+            }
+          });
+        }
       }
-    });
+    );
   });
 
   socket.on('UNAUTH_USER', function(data) {
-    ActiveSockets.remove({ socketId: socket.id }, function(error, data) {
+    ActiveSockets.findOne({ socketId: socket.id }, function (error, data) {
       if(!error) {
-        socket.broadcast.emit('CLIENT_DISCONNECTED', data.username);
+        if(data) {
+          socket.broadcast.emit('CLIENT_DISCONNECTED', data.username);
+          data.remove();
+        }
       }
     });
   });
 
 
   socket.on('disconnect', function() {
-    ActiveSockets.remove({ socketId: socket.id }, function (error, data) {
-      socket.broadcast.emit('CLIENT_DISCONNECTED', data.username);
+    ActiveSockets.findOne({ socketId: socket.id }, function (error, data) {
+      if(!error) {
+        if(data) {
+          socket.broadcast.emit('CLIENT_DISCONNECTED', data.username);
+          data.remove();
+        }
+      }
     });
   });
 });
