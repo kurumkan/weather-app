@@ -1,18 +1,19 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const expressSanitizer = require("express-sanitizer");
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const expressSanitizer = require('express-sanitizer');
 
 const MONGO_URL = process.env.MONGOLAB_URI || 'mongodb://localhost/facebook-clone';
 mongoose.connect(MONGO_URL);
 
+const ActiveSockets = require('./models/activesockets');
 const User = require('./models/user');
 
 app.use(function(req, res, next){
-  if(req.headers["x-forwarded-proto"] === "https"){
-    res.redirect("http://"+req.hostname+req.url);
+  if(req.headers['x-forwarded-proto'] === 'https'){
+    res.redirect('http://' + req.hostname + req.url);
   }else{
     next();
   }
@@ -35,24 +36,37 @@ const server = app.listen(PORT, () => console.log('Server started on port ' + PO
 
 // sockets
 const io = require('socket.io').listen(server);
-const activeSockets = {};
 
 io.sockets.on('connection', function(socket) {
   socket.on('AUTH_USER', function(data) {
-    activeSockets[socket.id] = data.username;
-    socket.broadcast.emit('CLIENT_CONNECTED', data.username);
-    socket.emit('SET_ACTIVE_CLIENTS', activeSockets);
+    ActiveSockets.create({
+      socketId: socket.id,
+      username: data.username
+    }, function (error, newSocket) {
+      if(!error) {
+        socket.broadcast.emit('CLIENT_CONNECTED', data.username);
+        ActiveSockets.find({}, function(error, activeSockets) {
+          if(!error) {
+            socket.emit('SET_ACTIVE_CLIENTS', activeSockets);
+          }
+        });
+      }
+    });
   });
 
   socket.on('UNAUTH_USER', function(data) {
-    socket.broadcast.emit('CLIENT_DISCONNECTED', activeSockets[socket.id]);
-    delete activeSockets[socket.id];
+    ActiveSockets.remove({ socketId: socket.id }, function(error, data) {
+      if(!error) {
+        socket.broadcast.emit('CLIENT_DISCONNECTED', data.username);
+      }
+    });
   });
 
 
   socket.on('disconnect', function() {
-    socket.broadcast.emit('CLIENT_DISCONNECTED', activeSockets[socket.id]);
-    delete activeSockets[socket.id];
+    ActiveSockets.remove({ socketId: socket.id }, function (error, data) {
+      socket.broadcast.emit('CLIENT_DISCONNECTED', data.username);
+    });
   });
 });
 
@@ -65,11 +79,11 @@ app.get('/api/users', function(req, res) {
   User.find({}, function(error, users) {
     if(error) {
       res.status(500);
-      res.json({error: "Server error"});
+      res.json({error: 'Server error'});
     } else {
       if(!users) {
         response.status(422);
-        response.json({error: "Cannot get users"});
+        response.json({error: 'Cannot get users'});
       } else {
         const data = users.map(user => ({
           firstName: user.firstName,
@@ -88,7 +102,7 @@ app.get('/api/users/:username', function(req, res) {
   User.find({ username }, function(error, users) {
     if(error) {
       res.status(500);
-      res.json({error: "Server error"});
+      res.json({error: 'Server error'});
     } else {
       if(!users) {
         res.status(422).json({ error: 'User does not exist' });
@@ -115,7 +129,7 @@ app.put('/api/users/:username', function(req, res) {
   User.findOne({ username }, function(error, user) {
     if(error) {
       res.status(500);
-      res.json({error: "Server error"});
+      res.json({error: 'Server error'});
     } else {
       if(!user) {
         res.status(422).json({ error: 'user does not exist' });

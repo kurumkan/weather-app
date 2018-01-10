@@ -6,7 +6,7 @@ const API_URL = process.env.NODE_ENV === 'production' ? window.location.host : '
 const socket = io(API_URL);
 
 socket.on('SET_ACTIVE_CLIENTS', data => {
-  store.dispatch(setActiveClients(Object.values(data)));
+  store.dispatch(setActiveClients(data.map(socket => socket.username)));
 });
 
 socket.on('CLIENT_CONNECTED', username => {

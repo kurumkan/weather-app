@@ -9,7 +9,8 @@ const userSchema = new Schema({
   password: { type: String, trim: true },
   firstName: { type: String, unique:false, trim: true, sparse: true },
   lastName: { type: String, unique:false, trim: true, sparse: true },
-  imageUrl: { type: String, unique:false, trim: true, sparse: true }
+  imageUrl: { type: String, unique:false, trim: true, sparse: true },
+  last_seen_at: { type: Date },
 });
 
 
@@ -30,7 +31,7 @@ userSchema.pre('save', function(next){
       next();
     })
   })
-})
+});
 
 //define a new function on userSchema
 userSchema.methods.comparePassword = function(submittedPassword, callback){

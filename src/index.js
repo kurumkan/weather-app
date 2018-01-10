@@ -34,7 +34,7 @@ if(token) {
 ReactDOM.render(
   <Provider store={store}>
     <Router
-     routes={routes}
+      routes={routes}
       history={history}
       render={applyRouterMiddleware(useScroll())}
     />
