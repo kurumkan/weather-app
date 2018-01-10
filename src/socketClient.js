@@ -6,7 +6,6 @@ const API_URL = process.env.NODE_ENV === 'production' ? window.location.host : '
 const socket = io(API_URL);
 
 socket.on('SET_ACTIVE_CLIENTS', data => {
-  console.log(data)
   store.dispatch(setActiveClients(data.map(socket => socket.username)));
 });
 
@@ -15,7 +14,6 @@ socket.on('CLIENT_CONNECTED', username => {
 });
 
 socket.on('CLIENT_DISCONNECTED', username => {
-  console.log(username , 'disconnected')
   store.dispatch(notifyClientStatusChange(username, false));
 });
 
