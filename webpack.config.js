@@ -8,13 +8,13 @@ const VENDOR_LIBS = [
   'react',
   'react-dom',
   'react-fontawesome',
-  'react-masonry-infinite-scroll',
   'react-redux',
   'react-router',
   'react-router-redux',
   'react-router-scroll',
   'redux',
-  'redux-thunk'
+  'redux-thunk',
+  'redux-form'
 ];
 
 const isDev = process.env.NODE_ENV !== 'production';
