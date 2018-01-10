@@ -5,8 +5,6 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const expressSanitizer = require("express-sanitizer");
 
-const { handleError } = require("./util_helpers.js");
-
 const MONGO_URL = process.env.MONGOLAB_URI || 'mongodb://localhost/facebook-clone';
 mongoose.connect(MONGO_URL);
 
@@ -66,15 +64,21 @@ app.post('/api/auth/signin', requireSignin, Auth.signin);
 app.get('/api/users', function(req, res) {
   User.find({}, function(error, users) {
     if(error) {
-      handle500(res, error);
+      res.status(500);
+      res.json({error: "Server error"});
     } else {
-      const data = users.map(user => ({
-        firstName: user.firstName,
-        imageUrl: user.imageUrl,
-        lastName: user.lastName,
-        username: user.username
-      }));
-      res.json({ users: data });
+      if(!users) {
+        response.status(422);
+        response.json({error: "Cannot get users"});
+      } else {
+        const data = users.map(user => ({
+          firstName: user.firstName,
+          imageUrl: user.imageUrl,
+          lastName: user.lastName,
+          username: user.username
+        }));
+        res.json({users: data});
+      }
     }
   });
 });
@@ -83,10 +87,11 @@ app.get('/api/users/:username', function(req, res) {
   const { username } = req.params;
   User.find({ username }, function(error, users) {
     if(error) {
-      handle500(res, error);
+      res.status(500);
+      res.json({error: "Server error"});
     } else {
       if(!users) {
-        res.status(422).json({ error: 'user does not exist' });
+        res.status(422).json({ error: 'User does not exist' });
       }
       const user = users[0];
       const data = {
@@ -109,7 +114,8 @@ app.put('/api/users/:username', function(req, res) {
 
   User.findOne({ username }, function(error, user) {
     if(error) {
-      handle500(res, error);
+      res.status(500);
+      res.json({error: "Server error"});
     } else {
       if(!user) {
         res.status(422).json({ error: 'user does not exist' });

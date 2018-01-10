@@ -24,6 +24,7 @@ const createRoutes = (store) => {
         },
         {
           path: 'users/:username',
+
           component: RequireAuth(ProfileContainer),
         },
         {
