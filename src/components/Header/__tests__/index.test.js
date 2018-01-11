@@ -1,7 +1,6 @@
 import Header from '../index.js';
 import React from 'react';
 import { mount } from 'enzyme';
-import { routes } from 'root';
 
 describe('Header', () => {
   let mockCallback;

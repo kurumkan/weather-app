@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Img renders correctly 1`] = `
+<div
+  className="image-wrapper"
+  style={
+    Object {
+      "paddingTop": "100%",
+      "width": "100%",
+    }
+  }
+>
+  <img
+    className="placeholder false"
+    src="test-file-stub"
+  />
+  <img
+    className="image false"
+    onLoad={[Function]}
+    src="test-file-stub"
+  />
+</div>
+`;
