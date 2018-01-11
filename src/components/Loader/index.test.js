@@ -1,12 +1,12 @@
 import Loader from './index.js';
 import React from 'react';
-import { mount } from 'enzyme';
+import renderer from 'react-test-renderer';
 
 describe('Loader', () => {
-  it('renders', () => {
-    const wrapper = mount(
+  it('renders correctly', () => {
+    const rendered = renderer.create(
       <Loader />
     );
-    expect(wrapper.find('.loader-wrapper').exists()).toEqual(true);
+    expect(rendered.toJSON()).toMatchSnapshot();
   });
 });
