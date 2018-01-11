@@ -10,6 +10,6 @@ Alert.propTypes = {
 
 Alert.defaultProps = {
   message: ''
-}
+};
 
 export default Alert;

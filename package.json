@@ -34,7 +34,8 @@
   "homepage": "https://github.com/kurumkan/facebook-dummy-clone#readme",
   "jest": {
     "moduleNameMapper": {
-      "^.+\\.(css|less)$": "<rootDir>/jestConfigs/CSSStub.js"
+      "^.+\\.(css|scss)$": "<rootDir>/jestConfigs/CSSStub.js",
+      "root": "<rootDir>/src/index"
     },
     "setupFiles": [
       "<rootDir>/jestConfigs/setupTests.js"

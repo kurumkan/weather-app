@@ -14,7 +14,7 @@ import { AUTH_USER } from 'constants/actionTypes';
 
 export const store = configureStore(browserHistory);
 const history = syncHistoryWithStore(browserHistory, store);
-const routes = createRoutes(store);
+export const routes = createRoutes(store);
 
 if(process.env.NODE_ENV !== 'production') {
   window.__store__ = store;
@@ -41,3 +41,4 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('app')
 );
+

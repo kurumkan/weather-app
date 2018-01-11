@@ -1,4 +1,4 @@
-import Loader from './index.js';
+import Loader from '../index.js';
 import React from 'react';
 import renderer from 'react-test-renderer';
 

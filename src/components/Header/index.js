@@ -19,8 +19,9 @@ const Header = ({ authenticated, username, signoutUser }) => (
 
 Header.propTypes = {
   authenticated: PropTypes.bool,
-  signoutUser: PropTypes.func.isRequired,
-  username: PropTypes.string
+  username: PropTypes.string,
+
+  signoutUser: PropTypes.func.isRequired
 };
 
 Header.defaultProps = {
