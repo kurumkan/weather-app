@@ -12,7 +12,8 @@
     "backend-dev": "nodemon server.js",
     "deploy-heroku": "git push heroku master",
     "test": "jest",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watchAll",
+    "test:update": "jest -u"
   },
   "pre-commit": "lint",
   "repository": {
