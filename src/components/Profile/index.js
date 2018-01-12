@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ImgPlaceholder from '../../images/image-placeholder.jpg';
+import ImgPlaceholder from 'images/image-placeholder.jpg';
 import Img from 'components/Img';
 import Loader from 'components/Loader';
 import './style.css';
