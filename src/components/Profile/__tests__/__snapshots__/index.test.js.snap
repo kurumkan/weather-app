@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Alert renders correctly 1`] = `
+<section
+  className="profile-section"
+>
+  <div
+    className="profile"
+  >
+    <div
+      className="image-wrapper"
+      style={
+        Object {
+          "paddingTop": "100%",
+          "width": "100%",
+        }
+      }
+    >
+      <img
+        className="placeholder false"
+        src="test-file-stub"
+      />
+      <img
+        className="image false"
+        onLoad={[Function]}
+        src="test-file-stub"
+      />
+    </div>
+    <div>
+      <h2>
+        John
+         
+        Doe
+      </h2>
+    </div>
+    <div>
+      <span>
+        @
+        johndoe
+      </span>
+      <span
+        className="status online"
+      >
+        online
+      </span>
+    </div>
+  </div>
+</section>
+`;
