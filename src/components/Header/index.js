@@ -9,7 +9,7 @@ const Header = ({ authenticated, username, signoutUser }) => (
       <ul>
         { authenticated && <li><Link to="/">Home</Link></li> }
         { authenticated && <li><Link to={`/users/${username}/edit`}>Profile Edit</Link></li> }
-        { authenticated && <li className="right-aligned"><Link onClick={signoutUser} to="/signup">Signout</Link></li> }
+        { authenticated && <li className="right-aligned signout"><Link onClick={signoutUser} to="/signup">Signout</Link></li> }
         { !authenticated && <li><Link to="signin">Signin</Link></li> }
         { !authenticated && <li><Link to="signup">Signup</Link></li> }
       </ul>
