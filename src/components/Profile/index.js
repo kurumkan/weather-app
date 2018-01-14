@@ -7,7 +7,7 @@ import './style.css';
 
 class Profile extends Component {
   componentDidMount() {
-    this.props.getUser(this.props.params.username);
+    this.props.getUser(this.props.match.params.username);
   }
 
   render() {

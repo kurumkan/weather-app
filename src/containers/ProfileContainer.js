@@ -1,3 +1,4 @@
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import Profile from 'components/Profile';
 import { getUser } from 'actions/usersActions';
@@ -12,4 +13,4 @@ const actions = {
   getUser
 };
 
-export default connect(select, actions)(Profile);
+export default withRouter(connect(select, actions)(Profile));

@@ -1,4 +1,5 @@
-import { browserHistory } from 'react-router';
+import browserHistory from 'browserHistory';
+
 import {
   GET_USERS_REQUEST,
   GET_USERS_SUCCESS,
@@ -99,6 +100,7 @@ export const signoutUser = () => (dispatch) => {
 
 export const signupUser = () => (dispatch, getState) => {
   const { firstName, lastName, username, email, password, imageUrl } = getState().form.signup.values;
+  console.log(firstName, 'signup')
   return api.signupUser({ firstName, lastName, username, email, password, imageUrl })
     .then(response => dispatch(authUser(response.data)))
     .catch(e => {

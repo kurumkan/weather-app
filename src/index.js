@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
-import { applyRouterMiddleware, browserHistory, Router } from 'react-router';
-import { useScroll } from 'react-router-scroll';
+import { Router } from 'react-router-dom';
+
+import createRoutes from 'routes';
 import 'normalize.css';
 import 'global-styles.css';
 
-import createRoutes from 'routes';
 import configureStore from 'store';
-
+import browserHistory from 'browserHistory';
 import { AUTH_USER } from 'constants/actionTypes';
 
 export const store = configureStore(browserHistory);
@@ -33,11 +33,7 @@ if(token) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router
-      routes={routes}
-      history={history}
-      render={applyRouterMiddleware(useScroll())}
-    />
+    <Router history={browserHistory}>{routes}</Router>
   </Provider>,
   document.getElementById('app')
 );

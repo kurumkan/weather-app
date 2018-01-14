@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import Img from 'components/Img';
 import Loader from 'components/Loader';
@@ -17,7 +17,7 @@ class UsersList extends Component {
       const status = this.props.activeUsers.indexOf(user.username) < 0 ? 'offline' : 'online';
       return (
         <div key={user.username} className="users-list-item">
-          <Link to={`users/${user.username}/`} className="user-link">
+          <Link to={`/users/${user.username}/`} className="user-link">
             <div className="img-wrapper">
               <Img imageUrl={user.imageUrl} placeholder={ImgPlaceholder} width="200px" />
             </div>

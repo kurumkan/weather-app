@@ -1,3 +1,4 @@
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import Signin from 'components/Signin';
 import { signinUser } from 'actions/usersActions';
@@ -10,4 +11,4 @@ const actions = {
   signinUser
 };
 
-export default connect(select, actions)(Signin);
+export default withRouter(connect(select, actions)(Signin));

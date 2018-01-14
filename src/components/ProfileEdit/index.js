@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import { browserHistory } from 'react-router';
 import './style.css';
 
 const validate = ( fromProps ) => {
@@ -24,8 +23,8 @@ const validate = ( fromProps ) => {
 
 class ProfileEdit extends React.Component {
   componentDidMount() {
-    if(this.props.username !== this.props.params.username) {
-      browserHistory.push(`/users/${this.props.username}/edit`);
+    if(this.props.username !== this.props.match.params.username) {
+      this.props.history.push(`/users/${this.props.username}/edit`);
     }
   }
 

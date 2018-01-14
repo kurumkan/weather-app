@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import './style.css';
 
 const Header = ({ authenticated, username, signoutUser }) => (
@@ -10,8 +10,8 @@ const Header = ({ authenticated, username, signoutUser }) => (
         { authenticated && <li><Link to="/">Home</Link></li> }
         { authenticated && <li><Link to={`/users/${username}/edit`}>Profile Edit</Link></li> }
         { authenticated && <li className="right-aligned signout"><Link onClick={signoutUser} to="/signup">Signout</Link></li> }
-        { !authenticated && <li><Link to="signin">Signin</Link></li> }
-        { !authenticated && <li><Link to="signup">Signup</Link></li> }
+        { !authenticated && <li><Link to="/signin">Signin</Link></li> }
+        { !authenticated && <li><Link to="/signup">Signup</Link></li> }
       </ul>
     </nav>
   </header>
