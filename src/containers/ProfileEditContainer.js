@@ -1,3 +1,4 @@
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import ProfileEdit from 'components/ProfileEdit';
 import { updateUser } from 'actions/usersActions';
@@ -19,4 +20,4 @@ const actions = {
   updateUser
 };
 
-export default connect(select, actions)(ProfileEdit);
+export default withRouter(connect(select, actions)(ProfileEdit));

@@ -1,3 +1,4 @@
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import Header from 'components/Header';
 import { signoutUser } from 'actions/usersActions';
@@ -11,4 +12,4 @@ const actions = {
   signoutUser
 };
 
-export default connect(select, actions)(Header);
+export default withRouter(connect(select, actions)(Header));

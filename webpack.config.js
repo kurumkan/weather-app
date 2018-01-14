@@ -6,12 +6,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VENDOR_LIBS = [
   'axios',
   'react',
+  'react-router-dom',
   'react-dom',
   'react-fontawesome',
   'react-redux',
-  'react-router',
   'react-router-redux',
-  'react-router-scroll',
   'redux',
   'redux-thunk',
   'redux-form'

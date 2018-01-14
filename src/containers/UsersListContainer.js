@@ -1,3 +1,4 @@
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import UsersList from 'components/UsersList';
 import { getUsers } from 'actions/usersActions';
@@ -11,4 +12,4 @@ const actions = {
   getUsers
 };
 
-export default connect(select, actions)(UsersList);
+export default withRouter(connect(select, actions)(UsersList));
