@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import ProfileImg from 'images/profile.jpg';
 
-describe('Alert', () => {
+describe('Profile', () => {
   it('renders correctly', () => {
     const rendered = renderer.create(
       <Profile

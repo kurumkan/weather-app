@@ -116,17 +116,18 @@ app.get('/api/users/:username', function(req, res) {
       res.status(500);
       res.json({error: 'Server error'});
     } else {
-      if(!users) {
-        res.status(422).json({ error: 'User does not exist' });
+      if(!users || (users && !users.length)) {
+        res.status(404).json({ error: 'User does not exist' });
+      } else {
+        const user = users[0];
+        const data = {
+          firstName: user.firstName,
+          imageUrl: user.imageUrl,
+          lastName: user.lastName,
+          username: user.username
+        };
+        res.json({user: data});
       }
-      const user = users[0];
-      const data = {
-        firstName: user.firstName,
-        imageUrl: user.imageUrl,
-        lastName: user.lastName,
-        username: user.username
-      };
-      res.json({ user: data });
     }
   });
 });

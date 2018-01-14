@@ -23,7 +23,7 @@ import api from 'api';
 export const getUsers = (offset = 0, limit = 10) => (dispatch, getState) => {
   dispatch({ type: GET_USERS_REQUEST });
 
-  api.getUsers(offset, limit)
+  return api.getUsers(offset, limit)
     .then((res) => {
       dispatch({
         type: GET_USERS_SUCCESS,
@@ -41,7 +41,7 @@ export const getUsers = (offset = 0, limit = 10) => (dispatch, getState) => {
 export const getUser = username => (dispatch, getState) => {
   dispatch({ type: GET_USER_REQUEST });
 
-  api.getUser(username)
+  return api.getUser(username)
     .then((res) => {
       dispatch({
         type: GET_USER_SUCCESS,
@@ -49,10 +49,14 @@ export const getUser = username => (dispatch, getState) => {
       });
     })
     .catch(e => {
-      dispatch({
-        type: GET_USER_FAILURE,
-        payload: 'Cannot load the user'
-      });
+      if(e.request && e.request.status === 404) {
+        browserHistory.push('/404');
+      } else {
+        dispatch({
+          type: GET_USER_FAILURE,
+          payload: 'Cannot load the user'
+        });
+      }
     });
 };
 
@@ -60,7 +64,7 @@ export const getUser = username => (dispatch, getState) => {
 export const updateUser = (username) => (dispatch, getState) => {
   dispatch({ type: UPDATE_USER_REQUEST });
   const data = getState().form.updateUser.values;
-  api.updateUser(username, data)
+  return api.updateUser(username, data)
     .then((res) => {
       localStorage.setItem( 'firstName', data.firstName );
       localStorage.setItem( 'lastName', data.lastName );
@@ -118,7 +122,7 @@ export const signupUser = () => (dispatch, getState) => {
 
 export const signinUser = () => (dispatch, getState) => {
   const { login, password } = getState().form.signin.values;
-  api.signinUser({ login, password })
+  return api.signinUser({ login, password })
     .then((response) => dispatch(authUser(response.data)))
     .catch(e => {
       let message = 'Sorry something went wrong';
