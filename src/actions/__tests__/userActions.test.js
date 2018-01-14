@@ -86,20 +86,43 @@ describe('userActions', () => {
 
     it('should dispatch GET_USER_FAILURE', () => {
       const store = mockStore({});
-      const error = { error: 'User does not exist' };
-      mockAxios.onGet(`/api/users/`)
-        .reply(404, error);
+      const error = { error: 'Server error' };
+
+      mockAxios.onGet(`/api/users/johndoe`)
+        .reply(500, error);
       const expectedActions = [
         {
-          type: 'GET_USER_REQUEST',
+          type: 'GET_USER_REQUEST'
         },
         {
           type: 'GET_USER_FAILURE',
           payload: 'Cannot load the user'
         }
       ];
-      return store.dispatch(getUser('asd'))
+      return store.dispatch(getUser('johndoe'))
         .then(() => expect(store.getActions()).toEqual(expectedActions));
+    });
+
+    it('should rerender to 404 page', () => {
+      jsdom.reconfigure({
+        url: "http://localhost:8080"
+      });
+      const store = mockStore({});
+      const error = { error: 'User does not exist' };
+      mockAxios.onGet(`/api/users/`)
+        .reply(404, error);
+
+      //expect(store.getActions()).toEqual(expectedActions));
+      const expectedActions = [
+        {
+          type: 'GET_USER_REQUEST'
+        }
+      ];
+      return store.dispatch(getUser('asd'))
+        .then(() => {
+          expect(window.location.href).toBe('http://localhost:8080/404')
+          expect(store.getActions()).toEqual(expectedActions)
+        });
     });
   });
 });

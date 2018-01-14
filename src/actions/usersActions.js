@@ -49,7 +49,7 @@ export const getUser = username => (dispatch, getState) => {
       });
     })
     .catch(e => {
-      if(e.request && e.request.status === 404) {
+      if(e.response && e.response.status === 404) {
         browserHistory.push('/404');
       } else {
         dispatch({
@@ -104,7 +104,6 @@ export const signoutUser = () => (dispatch) => {
 
 export const signupUser = () => (dispatch, getState) => {
   const { firstName, lastName, username, email, password, imageUrl } = getState().form.signup.values;
-  console.log(firstName, 'signup')
   return api.signupUser({ firstName, lastName, username, email, password, imageUrl })
     .then(response => dispatch(authUser(response.data)))
     .catch(e => {
