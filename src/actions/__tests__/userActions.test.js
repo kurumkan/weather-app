@@ -112,7 +112,6 @@ describe('userActions', () => {
       mockAxios.onGet(`/api/users/`)
         .reply(404, error);
 
-      //expect(store.getActions()).toEqual(expectedActions));
       const expectedActions = [
         {
           type: 'GET_USER_REQUEST'
