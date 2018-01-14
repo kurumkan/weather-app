@@ -8,7 +8,7 @@ describe('Alert', () => {
   it('renders correctly', () => {
     const rendered = renderer.create(
       <Profile
-        params={{username: 'johndoe'}}
+        match={{params: {username: 'johndoe'}}}
         activeUsers={['johndoe', 'joomrise']}
         firstName="John"
         gettingAUser={false}
@@ -24,7 +24,7 @@ describe('Alert', () => {
   it('should render loader', () => {
     const wrapper = mount(
       <Profile
-        params={{username: 'johndoe'}}
+        match={{params: {username: 'johndoe'}}}
         activeUsers={['johndoe', 'joomrise']}
         firstName="John"
         gettingAUser={true}
@@ -41,7 +41,7 @@ describe('Alert', () => {
     const getUser = jest.fn();
     const wrapper = mount(
       <Profile
-        params={{username: 'johndoe'}}
+        match={{params: {username: 'johndoe'}}}
         activeUsers={['johndoe', 'joomrise']}
         firstName="John"
         gettingAUser={true}
@@ -57,7 +57,7 @@ describe('Alert', () => {
   it('should render loader', () => {
     const wrapper = mount(
       <Profile
-        params={{username: 'johndoe'}}
+        match={{params: {username: 'johndoe'}}}
         activeUsers={['johndoe', 'joomrise']}
         firstName="John"
         gettingAUser={true}
@@ -73,7 +73,7 @@ describe('Alert', () => {
   it('should render online status', () => {
     const wrapper = mount(
       <Profile
-        params={{username: 'johndoe'}}
+        match={{params: {username: 'johndoe'}}}
         activeUsers={['johndoe', 'joomrise']}
         firstName="John"
         gettingAUser={false}
@@ -89,7 +89,7 @@ describe('Alert', () => {
   it('should render offline status', () => {
     const wrapper = mount(
       <Profile
-        params={{username: 'johndoe'}}
+        match={{params: {username: 'johndoe'}}}
         activeUsers={['joomrise']}
         firstName="John"
         gettingAUser={false}

@@ -1,6 +1,6 @@
 import Header from '../index.js';
 import React from 'react';
-import { Router, Route, browserHistory } from 'react-router'
+import { MemoryRouter } from 'react-router-dom'
 import { mount } from 'enzyme';
 
 describe('Header', () => {
@@ -12,11 +12,13 @@ describe('Header', () => {
 
   it('renders links for unauth user', () => {
     const wrapper = mount(
-      <Header
-        authenticated={false}
-        username=""
-        signoutUser={mockCallback}
-      />
+      <MemoryRouter>
+        <Header
+          authenticated={false}
+          username=""
+          signoutUser={mockCallback}
+        />
+      </MemoryRouter>
     );
     const links = wrapper.find('a');
     expect(links.length).toBe(2);
@@ -26,11 +28,13 @@ describe('Header', () => {
 
   it('renders links for auth user', () => {
     const wrapper = mount(
-      <Header
-        authenticated={true}
-        username="john doe"
-        signoutUser={mockCallback}
-      />
+      <MemoryRouter>
+        <Header
+          authenticated={true}
+          username="john doe"
+          signoutUser={mockCallback}
+        />
+      </MemoryRouter>
     );
     const links = wrapper.find('a');
     expect(links.length).toBe(3);
@@ -41,24 +45,15 @@ describe('Header', () => {
 
   it('calls action on signout click', () => {
     const wrapper = mount(
-      <Router history={browserHistory}>
-        <Route path={'/'} component={(props)=><div>{props.children}</div>}>
-          <Route path="*" component={
-              <Header
-                authenticated={true}
-                username="john doe"
-                signoutUser={()=>console.log('10000000000000')}
-              />
-            }
-          />
-        </Route>
-      </Router>
-      , {location:'asd'}
+      <MemoryRouter>
+        <Header
+          authenticated={true}
+          username="john doe"
+          signoutUser={mockCallback}
+        />
+      </MemoryRouter>
     );
-
-    var t= wrapper.find('div')
-    console.log(t.html(), '*****')
-    wrapper.find('.signout').find('a')//.simulate('click')
-    //expect(mockCallback).toHaveBeenCalled();
+    wrapper.find('.signout').find('a').simulate('click')
+    expect(mockCallback).toHaveBeenCalled();
   });
 });
