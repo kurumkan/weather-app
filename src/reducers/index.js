@@ -1,15 +1,11 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import { reducer as form } from 'redux-form';
 
-import usersReducer from 'reducers/usersReducer';
-import auth from 'reducers/authReducer'
+import weatherReducer from 'reducers/weatherDataReducer';
 
 const rootReducer = combineReducers({
   routing: routerReducer,
-  form,
-  users: usersReducer,
-  auth
+  weather: weatherReducer
 });
 
 export default rootReducer;

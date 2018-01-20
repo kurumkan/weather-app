@@ -7,7 +7,6 @@ import rootReducer from 'reducers';
 const configureStore = (history) => {
   const middleware = [
     thunk,
-    remoteActionsMiddleWare(socket),
     routerMiddleware(history)
   ];
 

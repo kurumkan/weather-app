@@ -3,7 +3,7 @@ import axios from 'axios';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import * as actions from '../usersActions';
+import * as actions from '../searchActions';
 const mockStore = configureStore([thunk]);
 const mockAxios = new MockAdapter(axios);
 

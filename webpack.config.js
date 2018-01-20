@@ -12,8 +12,7 @@ const VENDOR_LIBS = [
   'react-router-dom',
   'react-router-redux',
   'redux',
-  'redux-thunk',
-  'redux-form'
+  'redux-thunk'
 ];
 
 const isDev = process.env.NODE_ENV !== 'production';

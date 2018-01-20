@@ -1,21 +1,5 @@
 import axios from 'axios';
 
-const ROOT_URL = '/api/users/'
+const ROOT_URL = '/api/search/'
 
-export const getUsers = (offset = 0, limit = 10) => axios.get(`${ROOT_URL}?offset=${offset}&limit=${limit}`);
-
-export const getUser = (username) => axios.get(`${ROOT_URL}${username}`);
-
-export const updateUser = (username, data) => axios.put(`${ROOT_URL}/${username}`, data);
-
-export const signupUser = data => axios.post('/api/auth/signup', data);
-
-export const signinUser = data => axios.post('/api/auth/signin', data);
-
-export default {
-  getUsers,
-  getUser,
-  signupUser,
-  signinUser,
-  updateUser
-};
+export const getWeather = (city) => axios.get(`${ROOT_URL}?q=${city}`);
