@@ -1,7 +1,7 @@
 {
-  "name": "facebook-clone",
+  "name": "weather-app",
   "version": "1.0.0",
-  "description": "facebook clone (fcc challenge)",
+  "description": "weather-app",
   "main": "index.js",
   "scripts": {
     "lint": "eslint src/ --config=.eslintrc",
@@ -18,10 +18,9 @@
   "pre-commit": "lint",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kurumkan/facebook-dummy-clone.git"
+    "url": "git+https://github.com/kurumkan/weather-app.git"
   },
   "keywords": [
-    "fcc",
     "webpack",
     "react",
     "node.js"
@@ -29,9 +28,9 @@
   "author": "kurumkan",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kurumkan/facebook-dummy-clone/issues"
+    "url": "https://github.com/kurumkan/weather-app/issues"
   },
-  "homepage": "https://github.com/kurumkan/facebook-dummy-clone#readme",
+  "homepage": "https://github.com/kurumkan/weather-app#readme",
   "jest": {
     "testEnvironment": "jest-environment-jsdom-global",
     "moduleNameMapper": {
@@ -82,15 +81,9 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "express": "^4.16.1",
     "express-sanitizer": "^1.0.2",
-    "jwt-simple": "^0.5.1",
-    "mongoose": "^4.13.7",
-    "passport": "^0.4.0",
-    "passport-jwt": "^3.0.1",
-    "passport-local": "^1.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-fontawesome": "^1.6.1",
@@ -98,10 +91,6 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
-    "redux-form": "^7.2.0",
-    "redux-thunk": "^2.2.0",
-    "request": "^2.83.0",
-    "socket.io": "^1.7.2",
-    "socket.io-client": "^1.7.3"
+    "redux-thunk": "^2.2.0"
   }
 }

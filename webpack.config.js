@@ -89,7 +89,7 @@ const webpackConfig = {
 
     new HtmlWebpackPlugin({ // generate html file for us from template + add scripts to that
       template: 'src/index.template.ejs',
-      title: 'Facebook clone'
+      title: 'Weather App'
     })
   ],
 
