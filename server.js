@@ -1,43 +1,36 @@
 const path = require('path');
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
 const expressSanitizer = require('express-sanitizer');
+const axios = require('axios');
 
-app.use(function(req, res, next){
+const app = express();
+const API_URL = `http://api.openweathermap.org/data/2.5/forecast/daily?appid=${process.env.key}`;
+
+app.use((req, res, next) => {
   if(req.headers['x-forwarded-proto'] === 'https'){
-    res.redirect('http://' + req.hostname + req.url);
-  }else{
+    res.redirect(`http://${req.hostname}${req.url}`);
+  } else {
     next();
   }
 });
 
 app.use(expressSanitizer());
-app.use(bodyParser.json({type:'*/*'}));
+app.use(bodyParser.json({ type: '*/*' }));
 
 const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () => console.log('Server started on port ' + PORT));
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
-app.get('/api/users', function(req, res) {
-  User.find({}, function(error, users) {
-    if(error) {
-      res.status(500);
-      res.json({error: 'Server error'});
-    } else {
-      if(!users) {
-        response.status(422);
-        response.json({error: 'Cannot get users'});
-      } else {
-        const data = users.map(user => ({
-          firstName: user.firstName,
-          imageUrl: user.imageUrl,
-          lastName: user.lastName,
-          username: user.username
-        }));
-        res.json({users: data});
-      }
-    }
-  });
+app.get('/api/search', (req, res) => {
+  const { city } = req.query;
+  if(!city) {
+    res.status(400);
+    res.json('Please specify city');
+  } else {
+    axios.get(`${API_URL}&units=metric&cnt=7&q=${city}`)
+      .then(response => res.json(response.data.list))
+      .catch(e => console.log(e));
+  }
 });
 
 if(process.env.NODE_ENV === 'production') {
