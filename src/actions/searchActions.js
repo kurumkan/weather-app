@@ -8,19 +8,22 @@ import {
 import api from 'api';
 
 export const getWeatherData = (city) => (dispatch, getState) => {
-  dispatch({ type: GET_WEATHER_REQUEST });
-
-  return api.getWether(city)
+  dispatch({
+    type: GET_WEATHER_REQUEST,
+    payload: city
+  });
+  return api.getWeather(city)
     .then((res) => {
       dispatch({
         type: GET_WEATHER_SUCCESS,
         payload: res.data
       });
+      browserHistory.push(`/search/${city}`);
     })
-    .catch(e => {
+    .catch((e) => {
       dispatch({
         type: GET_WEATHER_FAILURE,
-        payload: 'Sorry! Something went wrong'
+        payload: e.response.data.message
       });
     });
 };

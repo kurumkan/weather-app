@@ -5,29 +5,34 @@ import {
 } from 'constants/actionTypes';
 
 const initialState = {
-  term: ''
+  error: '',
+  gettingData: false,
+  term: '',
+  weatherData: []
 };
 
 const weatherReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_WEATHER_REQUEST: {
       return {
-        ...state,
-        gettingUsers: true
+        ...initialState,
+        term: action.payload,
+        gettingData: true
       };
     }
 
     case GET_WEATHER_SUCCESS: {
       return {
         ...state,
-        users: action.payload,
-        gettingUsers: false
+        gettingData: false,
+        weatherData: action.payload,
       };
     }
     case GET_WEATHER_FAILURE: {
       return {
         ...state,
-        gettingUsers: false
+        gettingData: false,
+        error: action.payload
       };
     }
     default: {

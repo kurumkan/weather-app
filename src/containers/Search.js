@@ -3,10 +3,7 @@ import { connect } from 'react-redux';
 import Search from 'components/Search';
 import { getWeatherData } from 'actions/searchActions';
 
-const select = (state) => {
-  const { term } = state.weather;
-  return { term };
-};
+const select = ({ weather }) => weather;
 
 const actions = {
   getWeatherData

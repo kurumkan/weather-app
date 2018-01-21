@@ -25,11 +25,19 @@ app.get('/api/search', (req, res) => {
   const { city } = req.query;
   if(!city) {
     res.status(400);
-    res.json('Please specify city');
+    res.json({ message: 'Please specify city' });
   } else {
     axios.get(`${API_URL}&units=metric&cnt=7&q=${city}`)
       .then(response => res.json(response.data.list))
-      .catch(e => console.log(e));
+      .catch(e => {
+        if(e.response && e.response.status === 404) {
+          res.status(404);
+          res.json({ message: 'We do not have data for this city' });
+        } else {
+          res.status(500);
+          console.log({ message: 'Something went wrong, please try later' });
+        }
+      });
   }
 });
 
