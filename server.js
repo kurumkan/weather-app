@@ -28,7 +28,10 @@ app.get('/api/search', (req, res) => {
     res.json({ message: 'Please specify city' });
   } else {
     axios.get(`${API_URL}&units=metric&cnt=7&q=${city}`)
-      .then(response => res.json(response.data.list))
+      .then(response => {
+        const { list, city: { name } } = response.data;
+        res.json({ list, city: name });
+      })
       .catch(e => {
         if(e.response && e.response.status === 404) {
           res.status(404);

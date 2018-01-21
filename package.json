@@ -86,6 +86,7 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.1",
     "express-sanitizer": "^1.0.2",
+    "moment": "^2.20.1",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",

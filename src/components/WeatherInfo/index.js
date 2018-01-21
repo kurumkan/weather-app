@@ -20,6 +20,7 @@ class WeatherInfo extends Component {
       return <Loader />
     }
     const { term, weatherData } = this.props;
+    console.log(weatherData)
     return (
       <div className="weather-info">
         <div className="header">
@@ -36,10 +37,31 @@ class WeatherInfo extends Component {
             className="toggle-temp"
           />
         </div>
-
+        <div className="current-weather">
+          <h2>Tuesday, December 6th 2016</h2>
+          <h3>Light snow</h3>
+          <div className="weather-data">
+            <span>39&deg;F</span>
+            <span>icon</span>
+            <ul className="temp-list">
+              <li>
+                <span>Morning</span><span>40&deg;F</span>
+                <span>Day</span><span>40&deg;F</span>
+                <span>Evening</span><span>40&deg;F</span>
+                <span>Night</span><span>40&deg;F</span>
+              </li>
+            </ul>
+          </div>
+        </div>
         <ul>
           {
-            weatherData.map(data => <li key={data.dt}>{data.deg}</li>)
+            weatherData.map(data =>
+              <li key={data.dt}>
+                <span>{'Tuesday'}</span>
+                icon
+                <span>{data.temp.day}&deg;F</span>
+              </li>
+            )
           }
         </ul>
       </div>

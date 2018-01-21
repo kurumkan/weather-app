@@ -25,7 +25,8 @@ const weatherReducer = (state = initialState, action) => {
       return {
         ...state,
         gettingData: false,
-        weatherData: action.payload,
+        weatherData: action.payload.list,
+        term: action.payload.city
       };
     }
     case GET_WEATHER_FAILURE: {
