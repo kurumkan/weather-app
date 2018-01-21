@@ -1,0 +1,21 @@
+.weather-info {
+  .header {
+    display: flex;
+    flex-direction: row;
+    line-height: 5rem;
+    margin-bottom: 5rem;
+    position: relative;
+    h1 {
+      margin: 0 0 0 2rem;
+    }
+    a {
+      border-bottom: none;
+    }
+    .toggle-temp {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}

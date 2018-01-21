@@ -1,5 +1,5 @@
 import React from 'react';
-import './Main.scss';
+import './index.scss';
 
 const Home = ({ children }) => (
   <div className="container">

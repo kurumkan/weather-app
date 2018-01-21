@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import FontAwesome from 'react-fontawesome';
 import Loader from 'components/Loader';
 import './styles.scss';
 
@@ -33,12 +35,18 @@ class Search extends Component {
     const { error } = this.props;
 
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.term} onChange={this.handleChange} />
-          <span>{error}</span>
-          <button className="btn-t">Go</button>
+      <div className="search">
+        <form onSubmit={this.handleSubmit} className="search-form">
+          <div>{error}</div>
+          <input type="search" value={this.state.term} onChange={this.handleChange} placeholder="City" />
+          <button className="btn-search">
+            <FontAwesome name="search" size="lg" />
+          </button>
         </form>
+        <div className="current-location-cat">
+          <span>or</span>
+          use my <Link to="#">current location</Link>
+        </div>
       </div>
     );
   }
