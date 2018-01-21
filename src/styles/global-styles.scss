@@ -2,11 +2,11 @@
 /* Basic setup */
 /* ---------------------------------- */
 
-/* blue #4a76a8; */
-/* grey #656565 */
-/* black #000 */
 /* link-color #2a5885 */
-@import '~variables.scss';
+@import './normalize.scss';
+@import './variables.scss';
+@import "./weather-icons.scss";
+@import "./weather-icons-wind.scss";
 
 * {
     margin: 0;
@@ -33,6 +33,11 @@ html {
 html, body, #app {
     width: 100%;
     height: 100%;
+}
+
+h1, h2, h3 {
+    font-weight: 100;
+    margin: 1.5rem 0;
 }
 
 a {

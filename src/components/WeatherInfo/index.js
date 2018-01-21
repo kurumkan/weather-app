@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { string, arrayOf, shape, bool, func } from 'prop-types';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 import FontAwesome from 'react-fontawesome';
 import Loader from 'components/Loader';
 import ToggleSwitch from 'components/ToggleSwitch';
@@ -16,10 +17,11 @@ class WeatherInfo extends Component {
   }
 
   render() {
-    if(this.props.gettingData) {
-      return <Loader />
+    const { term, weatherData, gettingData } = this.props;
+    if(gettingData || !weatherData.length) {
+      return <Loader />;
     }
-    const { term, weatherData } = this.props;
+    const currentData = weatherData[0];
     console.log(weatherData)
     return (
       <div className="weather-info">
@@ -38,11 +40,11 @@ class WeatherInfo extends Component {
           />
         </div>
         <div className="current-weather">
-          <h2>Tuesday, December 6th 2016</h2>
+          <h2>{moment.unix(currentData.dt).format('dddd, MMMM Do YYYY')}</h2>
           <h3>Light snow</h3>
           <div className="weather-data">
-            <span>39&deg;F</span>
-            <span>icon</span>
+            <span className="current-degree">{currentData.temp.day}&deg;F</span>
+            <span><i className="wi wi-night-sleet"></i></span>
             <ul className="temp-list">
               <li>
                 <span>Morning</span><span>40&deg;F</span>
