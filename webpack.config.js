@@ -17,6 +17,11 @@ const VENDOR_LIBS = [
 
 const isDev = process.env.NODE_ENV !== 'production';
 
+const extractSass = new ExtractTextPlugin({
+  filename: "[name].[contenthash].css",
+  disable: isDev
+});
+
 const webpackConfig = {
   entry: {
     bundle: './src/index.js',
@@ -37,13 +42,17 @@ const webpackConfig = {
         use: 'babel-loader'
       },
       {
-        test: /\.css$/,
+        test: /\.scss$/,
         use: isDev ? [
-          'style-loader',
-          'css-loader'
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'sass-loader' }
         ] : ExtractTextPlugin.extract({
-          fallback: 'style-loader', // attach css to DOM (within <style></style> tag)
-          use: 'css-loader' // transofm import & url(...) from css to require(...)
+          use: [
+            { loader: 'css-loader' }, // transofm import & url(...) from css to require(...)
+            { loader: 'sass-loader' }
+          ],
+          fallback: 'style-loader' // attach css to DOM (within <style></style> tag)
         })
       },
       {
@@ -67,7 +76,7 @@ const webpackConfig = {
   },
 
   resolve: {
-    extensions: ['.js'], // what file extensions to expect
+    extensions: ['.js', '.scss'], // what file extensions to expect
     modules: [ // where to look up the modules(packages)
       path.resolve(__dirname, 'src'), 'node_modules',
     ]
@@ -89,7 +98,9 @@ const webpackConfig = {
     new HtmlWebpackPlugin({ // generate html file for us from template + add scripts to that
       template: 'src/index.template.ejs',
       title: 'Weather App'
-    })
+    }),
+
+    extractSass
   ],
 
   // WebpackDevServer will run on localhost:3000 and api calls will go to http://localhost:5000/api/

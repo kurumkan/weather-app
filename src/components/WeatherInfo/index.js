@@ -3,7 +3,7 @@ import { string, arrayOf, shape, bool, func } from 'prop-types';
 import { Link } from 'react-router-dom';
 import Loader from 'components/Loader';
 import { getWeatherData } from 'actions/searchActions';
-import './styles.css';
+import './styles.scss';
 
 class WeatherInfo extends Component {
   componentDidMount() {

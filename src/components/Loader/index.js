@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './style.css';
+import './style.scss';
 
 const Loader = () => (
   <div className="loader-wrapper">

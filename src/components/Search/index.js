@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Loader from 'components/Loader';
-import './styles.css';
+import './styles.scss';
 
 class Search extends Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class Search extends Component {
         <form onSubmit={this.handleSubmit}>
           <input type="text" value={this.state.term} onChange={this.handleChange} />
           <span>{error}</span>
-          <button>Go</button>
+          <button className="btn-t">Go</button>
         </form>
       </div>
     );
