@@ -5,7 +5,7 @@ import moment from 'moment';
 import FontAwesome from 'react-fontawesome';
 import Loader from 'components/Loader';
 import ToggleSwitch from 'components/ToggleSwitch';
-import { getWeatherData } from 'actions/searchActions';
+import { getWeatherData, changeTempFormat } from 'actions/searchActions';
 import './styles.scss';
 
 class WeatherInfo extends Component {
@@ -16,6 +16,12 @@ class WeatherInfo extends Component {
     }
   }
 
+  getActualTemp = (temp) => {
+    const { tempFormat } = this.props;
+    temp = tempFormat === 'C' ? temp : temp * 9/ 5 + 32;
+    return  <span>{Math.round(temp)}&deg;{tempFormat}</span>
+  };
+
   renderIcon = (weatherStatus) => {
     let suffix = weatherStatus.toLowerCase();
     switch(suffix) {
@@ -25,6 +31,7 @@ class WeatherInfo extends Component {
       case 'few clouds':
       case 'scattered clouds':
       case 'broken clouds':
+      case 'clouds':
         suffix = 'cloudy';
         break;
       case 'shower rain':
@@ -38,7 +45,7 @@ class WeatherInfo extends Component {
   }
 
   render() {
-    const { term, weatherData, gettingData } = this.props;
+    const { term, weatherData, gettingData, changeTempFormat } = this.props;
     if(gettingData || !weatherData.length) {
       return <Loader />;
     }
@@ -53,10 +60,10 @@ class WeatherInfo extends Component {
           <h1>{term}</h1>
           <ToggleSwitch
             options={{
-              checked: '&deg; C',
-              unchecked: '&deg F'
+              checked: '&deg; F',
+              unchecked: '&deg C'
             }}
-            onChange={() => console.log('toggled')}
+            onChange={changeTempFormat}
             className="toggle-temp"
           />
         </div>
@@ -64,22 +71,22 @@ class WeatherInfo extends Component {
           <h2>{moment.unix(currentData.dt).format('dddd, MMMM Do YYYY')}</h2>
           <h3>{currentData.weather[0].main}</h3>
           <div className="weather-data">
-            <span className="current-degree">{currentData.temp.day}&deg;F</span>
+            <span className="current-degree">{this.getActualTemp(currentData.temp.day)}</span>
             <span className="icon-wrapper">
               {this.renderIcon(currentData.weather[0].main)}
             </span>
             <ul className="temp-list">
               <li>
-                <span>Morning</span><span>{Math.round(currentData.temp.morn)}&deg;F</span>
+                <span>Morning</span>{this.getActualTemp(currentData.temp.morn)}
               </li>
               <li>
-                <span>Day</span><span>{Math.round(currentData.temp.day)}&deg;F</span>
+                <span>Day</span>{this.getActualTemp(currentData.temp.day)}
               </li>
               <li>
-                <span>Evening</span><span>{Math.round(currentData.temp.eve)}&deg;F</span>
+                <span>Evening</span>{currentData.temp.eve}
               </li>
               <li>
-                <span>Night</span><span>{Math.round(currentData.temp.night)}&deg;F</span>
+                <span>Night</span>{currentData.temp.night}
               </li>
             </ul>
           </div>
@@ -92,7 +99,7 @@ class WeatherInfo extends Component {
                 <span className="icon-wrapper">
                   {this.renderIcon(data.weather[0].main)}
                 </span>
-                <span>{Math.round(data.temp.day)}&deg;F</span>
+                {this.getActualTemp(data.temp.day)}
               </li>
             )
           }
@@ -105,14 +112,17 @@ class WeatherInfo extends Component {
 WeatherInfo.propTypes = {
   gettingData: bool,
   term: string,
+  tempFormat: string,
   weatherData: arrayOf(shape({})),
 
+  changeTempFormat: func.isRequired,
   getWeatherData: func.isRequired
 };
 
 WeatherInfo.defaultProps = {
   gettingData: false,
   term: '',
+  tempFormat: 'C',
   weatherData: []
 };
 

@@ -27,7 +27,7 @@ app.get('/api/search', (req, res) => {
     res.status(400);
     res.json({ message: 'Please specify city' });
   } else {
-    axios.get(`${API_URL}&units=metric&cnt=7&q=${city}`)
+    axios.get(`${API_URL}&units=metric&cnt=7&units=metric&q=${city}`)
       .then(response => {
         const { list, city: { name } } = response.data;
         res.json({ list, city: name });

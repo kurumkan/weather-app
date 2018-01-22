@@ -1,14 +1,16 @@
 import {
   GET_WEATHER_REQUEST,
   GET_WEATHER_SUCCESS,
-  GET_WEATHER_FAILURE
+  GET_WEATHER_FAILURE,
+  CHANGE_TEMP_FORMAT
 } from 'constants/actionTypes';
 
 const initialState = {
   error: '',
   gettingData: false,
   term: '',
-  weatherData: []
+  weatherData: [],
+  tempFormat: 'C'
 };
 
 const weatherReducer = (state = initialState, action) => {
@@ -34,6 +36,12 @@ const weatherReducer = (state = initialState, action) => {
         ...state,
         gettingData: false,
         error: action.payload
+      };
+    }
+    case CHANGE_TEMP_FORMAT: {
+      return {
+        ...state,
+        tempFormat: state.tempFormat === 'C' ? 'F' : 'C'
       };
     }
     default: {

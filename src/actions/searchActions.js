@@ -3,6 +3,7 @@ import {
   GET_WEATHER_REQUEST,
   GET_WEATHER_SUCCESS,
   GET_WEATHER_FAILURE,
+  CHANGE_TEMP_FORMAT
 } from 'constants/actionTypes';
 
 import api from 'api';
@@ -26,4 +27,10 @@ export const getWeatherData = (city) => (dispatch, getState) => {
         payload: e.response.data.message
       });
     });
+};
+
+export const changeTempFormat = () => {
+  return {
+    type: CHANGE_TEMP_FORMAT
+  };
 };
