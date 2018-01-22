@@ -16,6 +16,27 @@ class WeatherInfo extends Component {
     }
   }
 
+  renderIcon = (weatherStatus) => {
+    let suffix = weatherStatus.toLowerCase();
+    switch(suffix) {
+      case 'clear':
+        suffix = 'sunny';
+        break;
+      case 'few clouds':
+      case 'scattered clouds':
+      case 'broken clouds':
+        suffix = 'cloudy';
+        break;
+      case 'shower rain':
+        suffix = 'showers';
+        break;
+      case 'mist':
+        suffix = 'fog';
+        break;
+    }
+    return <i className={`wi wi-day-${suffix}`} />
+  }
+
   render() {
     const { term, weatherData, gettingData } = this.props;
     if(gettingData || !weatherData.length) {
@@ -41,27 +62,37 @@ class WeatherInfo extends Component {
         </div>
         <div className="current-weather">
           <h2>{moment.unix(currentData.dt).format('dddd, MMMM Do YYYY')}</h2>
-          <h3>Light snow</h3>
+          <h3>{currentData.weather[0].main}</h3>
           <div className="weather-data">
             <span className="current-degree">{currentData.temp.day}&deg;F</span>
-            <span><i className="wi wi-night-sleet"></i></span>
+            <span className="icon-wrapper">
+              {this.renderIcon(currentData.weather[0].main)}
+            </span>
             <ul className="temp-list">
               <li>
-                <span>Morning</span><span>40&deg;F</span>
-                <span>Day</span><span>40&deg;F</span>
-                <span>Evening</span><span>40&deg;F</span>
-                <span>Night</span><span>40&deg;F</span>
+                <span>Morning</span><span>{Math.round(currentData.temp.morn)}&deg;F</span>
+              </li>
+              <li>
+                <span>Day</span><span>{Math.round(currentData.temp.day)}&deg;F</span>
+              </li>
+              <li>
+                <span>Evening</span><span>{Math.round(currentData.temp.eve)}&deg;F</span>
+              </li>
+              <li>
+                <span>Night</span><span>{Math.round(currentData.temp.night)}&deg;F</span>
               </li>
             </ul>
           </div>
         </div>
-        <ul>
+        <ul className="forecast">
           {
             weatherData.map(data =>
               <li key={data.dt}>
-                <span>{'Tuesday'}</span>
-                icon
-                <span>{data.temp.day}&deg;F</span>
+                <span>{moment.unix(data.dt).format('dddd')}</span>
+                <span className="icon-wrapper">
+                  {this.renderIcon(data.weather[0].main)}
+                </span>
+                <span>{Math.round(data.temp.day)}&deg;F</span>
               </li>
             )
           }

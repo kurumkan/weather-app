@@ -23,8 +23,36 @@
     color: $color-primary;
     margin: 3rem 0;
     display: flex;
-    .current-degree {
-      font-size: 5rem;
+
+    .current-degree, .icon-wrapper {
+      font-size: 8rem;
+      margin-right: 3rem;
+    }
+
+    .temp-list {
+      list-style: none;
+      li {
+        margin-bottom: .3rem;
+        display: flex;
+        justify-content: space-between;
+        width: 14rem;
+      }
+    }
+  }
+  .forecast {
+    list-style: none;
+    font-size: 1.5rem;
+    li {
+      display: inline-block;
+      text-align: center;
+      width: 14%;
+      span {
+        display: block;
+      }
+      .icon-wrapper {
+        font-size: 3rem;
+        margin: 1rem 0;
+      }
     }
   }
 }

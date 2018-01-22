@@ -35,17 +35,19 @@ class Search extends Component {
     const { error } = this.props;
 
     return (
-      <div className="search">
-        <form onSubmit={this.handleSubmit} className="search-form">
-          <div>{error}</div>
-          <input type="search" value={this.state.term} onChange={this.handleChange} placeholder="City" />
-          <button className="btn-search">
-            <FontAwesome name="search" size="lg" />
-          </button>
-        </form>
-        <div className="current-location-cat">
-          <span>or</span>
-          use my <Link to="#">current location</Link>
+      <div className="search-wrapper">
+        <div className="search">
+          <form onSubmit={this.handleSubmit} className="search-form">
+            <div>{error}</div>
+            <input type="search" value={this.state.term} onChange={this.handleChange} placeholder="City" />
+            <button className="btn-search">
+              <FontAwesome name="search" size="lg" />
+            </button>
+          </form>
+          <div className="current-location-cat">
+            <span>or</span>
+            use my <Link to="#">current location</Link>
+          </div>
         </div>
       </div>
     );

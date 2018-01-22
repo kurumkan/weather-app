@@ -1,40 +1,43 @@
+@import "~styles/variables";
+
 .loader-wrapper {
-    background: #fff;
-    z-index: 10000;
-    height: 100%;
+    height: calc(100vh - 20rem);
     width: 100%;
-}
+    position: relative;
 
-.loader {
-    width: 30px;
-    height: 30px;
-    animation: spin 1s linear infinite;
+    z-index: 10000;
 
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    .loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
 
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+        div {
+            height: 60px;
+            width: 8px;
+            background-color: $color-primary;
+            margin: 0 3px;
 
-.loader .loader-inner-circle {
-    background: #777777;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin: 2px;
-}
+            animation: animation 1s linear infinite;
 
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
+            @for $i from 1 through 9 {
+                &:nth-child(#{$i}) {
+                    animation-delay: #{$i/30}s;
+                }
+            }
+        }
     }
-    100% {
-        transform: rotate(360deg);
+
+    @keyframes animation {
+        0% {
+            transform: rotateX(180deg);
+        }
+
+        100% {
+            transform: rotateX(0deg);
+        }
     }
 }
 

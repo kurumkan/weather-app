@@ -5,10 +5,15 @@ import './style.scss';
 const Loader = () => (
   <div className="loader-wrapper">
     <div className="loader">
-      <div className="loader-inner-circle" />
-      <div className="loader-inner-circle" />
-      <div className="loader-inner-circle" />
-      <div className="loader-inner-circle" />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
     </div>
   </div>
 );
