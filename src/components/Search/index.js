@@ -50,8 +50,8 @@ class Search extends Component {
     return (
       <div className="search-wrapper">
         <div className="search">
+          <div className="error">{error}</div>
           <form onSubmit={this.handleSubmit} className="search-form">
-            <div>{error}</div>
             <input type="search" value={this.state.term} onChange={this.handleChange} placeholder="City" />
             <button className="btn-search">
               <FontAwesome name="search" size="lg" />

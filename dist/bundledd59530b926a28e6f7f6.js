@@ -16803,13 +16803,13 @@ var Search = function (_Component) {
           'div',
           { className: 'search' },
           _react2.default.createElement(
+            'div',
+            { className: 'error' },
+            error
+          ),
+          _react2.default.createElement(
             'form',
             { onSubmit: this.handleSubmit, className: 'search-form' },
-            _react2.default.createElement(
-              'div',
-              null,
-              error
-            ),
             _react2.default.createElement('input', { type: 'search', value: this.state.term, onChange: this.handleChange, placeholder: 'City' }),
             _react2.default.createElement(
               'button',

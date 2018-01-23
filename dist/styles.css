@@ -97,6 +97,10 @@
       .search-wrapper .search .current-location-cat span {
         margin-bottom: 2rem;
         display: block; }
+    .search-wrapper .search .error {
+      color: #e39684;
+      text-align: center;
+      margin-bottom: 1rem; }
     .search-wrapper .search form {
       display: flex;
       flex-direction: row; }
