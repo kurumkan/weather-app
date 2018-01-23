@@ -19,17 +19,6 @@ if(process.env.NODE_ENV !== 'production') {
   window.__store__ = store;
 }
 
-const token = localStorage.getItem('token');
-if(token) {
-  const userid = localStorage.getItem('userid');
-  const firstName = localStorage.getItem('firstName');
-  const lastName = localStorage.getItem('lastName');
-  const username = localStorage.getItem('username');
-  const imageUrl = localStorage.getItem('imageUrl');
-
-  store.dispatch({ type: AUTH_USER, payload: {  userid, firstName, lastName, username, imageUrl }, meta: { remote: true } });
-}
-
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>{routes}</Router>

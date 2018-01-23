@@ -20,7 +20,7 @@
             background-color: $color-primary;
             margin: 0 3px;
 
-            animation: animation 1s linear infinite;
+            animation: animation .3s linear infinite;
 
             @for $i from 1 through 9 {
                 &:nth-child(#{$i}) {

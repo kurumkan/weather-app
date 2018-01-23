@@ -8,7 +8,7 @@ import {
 const initialState = {
   error: '',
   gettingData: false,
-  term: '',
+  term: localStorage.getItem('term') || '',
   weatherData: [],
   tempFormat: 'C'
 };
@@ -18,12 +18,12 @@ const weatherReducer = (state = initialState, action) => {
     case GET_WEATHER_REQUEST: {
       return {
         ...initialState,
-        term: action.payload,
         gettingData: true
       };
     }
 
     case GET_WEATHER_SUCCESS: {
+      localStorage.setItem('term', action.payload.city);
       return {
         ...state,
         gettingData: false,

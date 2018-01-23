@@ -10,9 +10,10 @@ import './styles.scss';
 
 class WeatherInfo extends Component {
   componentDidMount() {
-    const { match: { params }, getWeatherData, term } = this.props;
-    if(!term && params && params.city) {
-      getWeatherData(params.city);
+    const { match: { params }, getWeatherData } = this.props;
+    if(params && params.city) {
+      const { city } = params;
+      getWeatherData({ city });
     }
   }
 
@@ -26,7 +27,7 @@ class WeatherInfo extends Component {
     let suffix = weatherStatus.toLowerCase();
     switch(suffix) {
       case 'clear':
-        suffix = 'sunny';
+        suffix = 'day-sunny';
         break;
       case 'few clouds':
       case 'scattered clouds':
@@ -34,6 +35,8 @@ class WeatherInfo extends Component {
       case 'clouds':
         suffix = 'cloudy';
         break;
+      case 'rain':
+      case 'light rain':
       case 'shower rain':
         suffix = 'showers';
         break;
@@ -41,8 +44,8 @@ class WeatherInfo extends Component {
         suffix = 'fog';
         break;
     }
-    return <i className={`wi wi-day-${suffix}`} />
-  }
+    return <i className={`wi wi-${suffix}`} />
+  };
 
   render() {
     const { term, weatherData, gettingData, changeTempFormat } = this.props;
@@ -50,7 +53,7 @@ class WeatherInfo extends Component {
       return <Loader />;
     }
     const currentData = weatherData[0];
-    console.log(weatherData)
+
     return (
       <div className="weather-info">
         <div className="header">

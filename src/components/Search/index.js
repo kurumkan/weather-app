@@ -17,6 +17,19 @@ class Search extends Component {
       term: this.props.term
     });
   }
+  getLocalWeather = () => {
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+
+    const success = (pos) => this.props.getWeatherData({ lat: pos.coords.latitude, lon: pos.coords.longitude });
+
+    const error = () => console.warn('Sorry, cannot get your location');
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+  };
   handleChange = (e) => {
     this.setState({ term: e.target.value });
   };
@@ -24,7 +37,7 @@ class Search extends Component {
     e.preventDefault();
     const { term } = this.state;
     if(term) {
-      this.props.getWeatherData(term);
+      this.props.getWeatherData({ city: term });
     }
   };
   render() {
@@ -46,7 +59,7 @@ class Search extends Component {
           </form>
           <div className="current-location-cat">
             <span>or</span>
-            use my <Link to="#">current location</Link>
+            use my <Link to="#" onClick={this.getLocalWeather}>current location</Link>
           </div>
         </div>
       </div>

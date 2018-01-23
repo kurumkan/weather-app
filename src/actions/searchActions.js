@@ -8,18 +8,17 @@ import {
 
 import api from 'api';
 
-export const getWeatherData = (city) => (dispatch, getState) => {
+export const getWeatherData = (location) => (dispatch, getState) => {
   dispatch({
-    type: GET_WEATHER_REQUEST,
-    payload: city
+    type: GET_WEATHER_REQUEST
   });
-  return api.getWeather(city)
+  return api.getWeather(location)
     .then((res) => {
       dispatch({
         type: GET_WEATHER_SUCCESS,
         payload: res.data
       });
-      browserHistory.push(`/search/${city}`);
+      browserHistory.push(`/search/${res.data.city.toLowerCase()}`);
     })
     .catch((e) => {
       dispatch({

@@ -22,12 +22,14 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 app.get('/api/search', (req, res) => {
-  const { city } = req.query;
-  if(!city) {
+  const { city, lat, lon } = req.query;
+  if(!city && (lat === undefined || lon === undefined)) {
     res.status(400);
-    res.json({ message: 'Please specify city' });
+    res.json({ message: 'Please specify location' });
   } else {
-    axios.get(`${API_URL}&units=metric&cnt=7&units=metric&q=${city}`)
+    const reqString = city ? `q=${city}` : `lat=${lat}&lon=${lon}`;
+
+    axios.get(`${API_URL}&units=metric&cnt=7&${reqString}`)
       .then(response => {
         const { list, city: { name } } = response.data;
         res.json({ list, city: name });
