@@ -1,6 +1,6 @@
 # Weather App
-The project is in development.
-Some features has been implemented - you can see it in <a href="http://kurumkan-facebook.herokuapp.com">the demo</a>
+Test for ...
+<a href="">Demo</a>
 
 ## Installation
 ```
