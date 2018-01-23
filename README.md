@@ -1,6 +1,6 @@
 # Weather App
 Test for ...
-<a href="">Demo</a>
+<a href="http://weather-app-search.herokuapp.com">Demo</a>
 
 ## Installation
 ```
@@ -12,7 +12,7 @@ npm run frontend-dev
 ```
 Run backend(another terminal window)
 ```
-secret=123 npm run backend-dev
+key=YOUR_API_KEY npm run backend-dev
 ```
 
 open `localhost:3000`
