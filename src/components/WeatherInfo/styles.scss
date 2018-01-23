@@ -29,6 +29,12 @@
       margin-right: 3rem;
     }
 
+    @media (max-width: 575px) {
+      .current-degree, .icon-wrapper {
+        font-size: 5rem;
+      }
+    }
+
     .temp-list {
       list-style: none;
       li {
@@ -52,6 +58,12 @@
       .icon-wrapper {
         font-size: 3rem;
         margin: 1rem 0;
+      }
+      .day {
+        display: inline-block;
+      }
+      @media (max-width: 575px) {
+        width: 33.3333333%;
       }
     }
   }

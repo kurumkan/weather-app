@@ -15,3 +15,30 @@
     padding: 3rem;
   }
 }
+
+
+@media (max-width: 991px) {
+  .container {
+    padding: 7rem 10%;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding: 7rem 3rem;
+    .content-wrapper {
+      padding: 2rem;
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .container {
+    padding: 7rem 1rem;
+    .content-wrapper {
+      padding: 2rem;
+    }
+  }
+}
+
+

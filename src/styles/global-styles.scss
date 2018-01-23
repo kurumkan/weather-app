@@ -21,6 +21,19 @@ html {
     text-rendering: optimizeLegibility;
     color: $color-secondary;
 }
+
+@media (max-width: 991px) {
+    html {
+        font-size: 55%;
+    }
+}
+
+@media (max-width: 575px) {
+    html {
+        font-size: 50%;
+    }
+}
+
 .clearfix {  zoom: 1;  }
 .clearfix:after {
     content: '.';
@@ -40,6 +53,18 @@ h1, h2, h3 {
     margin: 1.5rem 0;
 }
 
+h1 {
+    font-size: 5rem;
+}
+
+h2 {
+    font-size: 3rem;
+}
+
+h3 {
+    font-size: 2rem;
+}
+
 a {
     &:link,
     &:visited {
@@ -57,3 +82,4 @@ a {
         border-bottom-color: $color-primary;
     }
 }
+

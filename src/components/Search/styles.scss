@@ -60,4 +60,16 @@
       }
     }
   }
+
+  @media (max-width: 991px) {
+    .search {
+      width: 90%;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .search {
+      width: 100%;
+    }
+  }
 }

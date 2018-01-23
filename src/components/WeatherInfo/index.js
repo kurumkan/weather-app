@@ -98,7 +98,7 @@ class WeatherInfo extends Component {
           {
             weatherData.map(data =>
               <li key={data.dt}>
-                <span>{moment.unix(data.dt).format('dddd')}</span>
+                <span className="day">{moment.unix(data.dt).format('dddd')}</span>
                 <span className="icon-wrapper">
                   {this.renderIcon(data.weather[0].main)}
                 </span>
