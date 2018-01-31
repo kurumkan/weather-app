@@ -3,22 +3,21 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const VENDOR_LIBS = [
-  'axios',
-  'react',
-  'react-dom',
-  'react-fontawesome',
-  'react-redux',
-  'react-router-dom',
-  'react-router-redux',
-  'redux',
-  'redux-thunk'
+const exList = [
+  'body-parser',
+  'express',
+  'express-sanitizer'
 ];
+
+const VENDOR_LIBS = Object.keys(require('./package.json').dependencies)
+  .filter(item => (
+    exList.indexOf(item) < 0
+  ));
 
 const isDev = process.env.NODE_ENV !== 'production';
 
 const extractSass = new ExtractTextPlugin({
-  filename: "[name].[contenthash].css",
+  filename: '[name].[contenthash].css',
   disable: isDev
 });
 

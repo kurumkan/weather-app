@@ -2,8 +2,9 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const expressSanitizer = require('express-sanitizer');
-const axios = require('axios');
 const keys = require('./config/keys');
+const axios = require('axios');
+
 const app = express();
 const API_URL = `http://api.openweathermap.org/data/2.5/forecast/daily?appid=${keys.googleAPIKey}`;
 
@@ -64,5 +65,4 @@ if(process.env.NODE_ENV === 'production') {
     });
   });
 }
-
 
