@@ -1,4 +1,3 @@
-import browserHistory from 'browserHistory';
 import {
   GET_WEATHER_REQUEST,
   GET_WEATHER_SUCCESS,
@@ -18,13 +17,13 @@ export const getWeatherData = (location) => (dispatch, getState) => {
         type: GET_WEATHER_SUCCESS,
         payload: res.data
       });
-      browserHistory.push(`/search/${res.data.city.toLowerCase()}`);
     })
     .catch((e) => {
       dispatch({
         type: GET_WEATHER_FAILURE,
-        payload: e.response.data.message
+        payload: (e.response && e.response.data.message) || e
       });
+      throw e;
     });
 };
 

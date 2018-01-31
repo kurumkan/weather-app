@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 import Loader from 'components/Loader';
+import browserHistory from 'browserHistory';
 import './styles.scss';
 
 class Search extends Component {
@@ -17,6 +18,7 @@ class Search extends Component {
       term: this.props.term
     });
   }
+
   getLocalWeather = () => {
     const options = {
       enableHighAccuracy: true,
@@ -37,7 +39,9 @@ class Search extends Component {
     e.preventDefault();
     const { term } = this.state;
     if(term) {
-      this.props.getWeatherData({ city: term });
+      this.props.getWeatherData({ city: term })
+        .then(() => browserHistory.push(`/search/${term.toLowerCase()}`))
+        .catch(() => {});
     }
   };
   render() {

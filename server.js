@@ -25,8 +25,7 @@ app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 app.get('/api/search', (req, res) => {
   const { city, lat, lon } = req.query;
   if(!city && (lat === undefined || lon === undefined)) {
-    res.status(400);
-    res.json({ message: 'Please specify location' });
+    res.status(400).json({ message: 'Please specify location' });
   } else {
     const reqString = city ? `q=${city}` : `lat=${lat}&lon=${lon}`;
 
@@ -37,11 +36,9 @@ app.get('/api/search', (req, res) => {
       })
       .catch(e => {
         if(e.response && e.response.status === 404) {
-          res.status(404);
-          res.json({ message: 'We do not have data for this city' });
+          res.status(404).json({ message: 'We do not have data for this city' });
         } else {
-          res.status(500);
-          console.log({ message: 'Something went wrong, please try later' });
+          res.status(500).json({ message: 'Something went wrong, please try later' });
         }
       });
   }
