@@ -9,14 +9,13 @@ class Toggle extends Component {
     this.state = {
       checked: this.props.checked
     };
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     this.setState({
       checked: !this.state.checked
     }, () => this.props.onChange(this.state.checked));
-  }
+  };
 
   render() {
     const { options, className } = this.props;
