@@ -3,9 +3,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const expressSanitizer = require('express-sanitizer');
 const axios = require('axios');
-
+const keys = require('./config/keys');
 const app = express();
-const API_URL = `http://api.openweathermap.org/data/2.5/forecast/daily?appid=${process.env.key}`;
+const API_URL = `http://api.openweathermap.org/data/2.5/forecast/daily?appid=${keys.googleAPIKey}`;
 
 app.use((req, res, next) => {
   if(req.headers['x-forwarded-proto'] === 'https'){
